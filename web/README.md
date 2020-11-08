@@ -35,13 +35,13 @@ npm run build --report
 
 ## 界面展示
 
-![拓扑图](web/images/screenshot-1-1.jpg)
+![拓扑图](/images/screenshot-1-1.jpg)
 
-![拓扑图](web/images/screenshot-1-2.jpg)
+![拓扑图](/images/screenshot-1-2.jpg)
 
-![灰度路由](web/images/screenshot-2.png)
+![灰度路由](/images/screenshot-2.png)
 
-![灰度发布](web/images/screenshot-3.png)
+![灰度发布](/images/screenshot-3.png)
 
 ### 依赖
 
