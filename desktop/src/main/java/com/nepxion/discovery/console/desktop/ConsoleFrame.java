@@ -31,10 +31,10 @@ public class ConsoleFrame extends JBasicFrame {
     }
 
     public void launch() {
-        ConsoleHierarchy deployHierarchy = new ConsoleHierarchy(new JBlackHeaderTextureStyle(), new JGreenOutlookTextureStyle());
+        ConsoleHierarchy consoleHierarchy = new ConsoleHierarchy(new JBlackHeaderTextureStyle(), new JGreenOutlookTextureStyle());
 
         JReflectionHierarchy reflectionHierarchy = new JReflectionHierarchy(20, 20);
-        reflectionHierarchy.setContentPane(deployHierarchy);
+        reflectionHierarchy.setContentPane(consoleHierarchy);
 
         getContentPane().add(reflectionHierarchy);
 
