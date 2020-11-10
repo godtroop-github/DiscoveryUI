@@ -27,7 +27,7 @@ public class ConsoleFrame extends JBasicFrame {
     private static final Logger LOG = LoggerFactory.getLogger(ConsoleFrame.class);
 
     public ConsoleFrame() {
-        super(ConsoleLocaleFactory.getString("title") + " " + getSubTitle(), ConsoleIconFactory.getSwingIcon("ribbon/navigator_nepxion.png"), new Dimension(1280, 900));
+        super(ConsoleLocaleFactory.getString("title") + " " + getSubTitle(), ConsoleIconFactory.getSwingIcon("ribbon/navigator_nepxion.png"), new Dimension(1600, 1200));
     }
 
     public void launch() {
