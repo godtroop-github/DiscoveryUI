@@ -48,7 +48,7 @@ import com.nepxion.swing.popupmenu.JBasicPopupMenu;
 public abstract class AbstractTopology extends JPanel {
     private static final long serialVersionUID = 1L;
 
-    public static final String IMAGE_FOLDER = "/" + ConsoleIconFactory.ICON_FOLDER;
+    public static final String IMAGE_FOLDER = "/" + ConsoleIconFactory.getIconPath();
 
     protected TGraph graph;
     protected TDataBox dataBox = new TDataBox();

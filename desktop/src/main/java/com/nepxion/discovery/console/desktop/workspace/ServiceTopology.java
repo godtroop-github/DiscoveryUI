@@ -53,7 +53,7 @@ import com.nepxion.discovery.console.desktop.constant.ConsoleConstant;
 import com.nepxion.discovery.console.desktop.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.entity.Instance;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
-import com.nepxion.discovery.console.desktop.locale.ConsoleLocale;
+import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.ui.UIFactory;
 import com.nepxion.discovery.console.desktop.workspace.topology.AbstractTopology;
 import com.nepxion.discovery.console.desktop.workspace.topology.LocationEntity;
@@ -159,14 +159,14 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private void initializeToolBar() {
-        pushAsyncModeRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocale.getString("push_async_mode"), ConsoleLocale.getString("push_async_mode"), true);
-        pushSyncModeRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocale.getString("push_sync_mode"), ConsoleLocale.getString("push_sync_mode"));
+        pushAsyncModeRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocaleFactory.getString("push_async_mode"), ConsoleLocaleFactory.getString("push_async_mode"), true);
+        pushSyncModeRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocaleFactory.getString("push_sync_mode"), ConsoleLocaleFactory.getString("push_sync_mode"));
         ButtonGroup pushModeButtonGroup = new ButtonGroup();
         pushModeButtonGroup.add(pushAsyncModeRadioButtonMenuItem);
         pushModeButtonGroup.add(pushSyncModeRadioButtonMenuItem);
 
-        ruleToConfigCenterRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocale.getString("rule_to_config_center"), ConsoleLocale.getString("rule_to_config_center"), true);
-        ruleToServiceRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocale.getString("rule_to_service"), ConsoleLocale.getString("rule_to_service"));
+        ruleToConfigCenterRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocaleFactory.getString("rule_to_config_center"), ConsoleLocaleFactory.getString("rule_to_config_center"), true);
+        ruleToServiceRadioButtonMenuItem = new JBasicRadioButtonMenuItem(ConsoleLocaleFactory.getString("rule_to_service"), ConsoleLocaleFactory.getString("rule_to_service"));
         ButtonGroup ruleToButtonGroup = new ButtonGroup();
         ruleToButtonGroup.add(ruleToConfigCenterRadioButtonMenuItem);
         ruleToButtonGroup.add(ruleToServiceRadioButtonMenuItem);
@@ -178,7 +178,7 @@ public class ServiceTopology extends AbstractTopology {
         pushControlPopupMenu.add(ruleToConfigCenterRadioButtonMenuItem);
         pushControlPopupMenu.add(ruleToServiceRadioButtonMenuItem);
 
-        JClassicMenuButton pushControllMenubutton = new JClassicMenuButton(ConsoleLocale.getString("push_control_mode"), ConsoleIconFactory.getSwingIcon("netbean/custom_node_16.png"), ConsoleLocale.getString("push_control_mode"));
+        JClassicMenuButton pushControllMenubutton = new JClassicMenuButton(ConsoleLocaleFactory.getString("push_control_mode"), ConsoleIconFactory.getSwingIcon("netbean/custom_node_16.png"), ConsoleLocaleFactory.getString("push_control_mode"));
         pushControllMenubutton.setPopupMenu(pushControlPopupMenu);
 
         JToolBar toolBar = getGraph().getToolbar();
@@ -200,7 +200,7 @@ public class ServiceTopology extends AbstractTopology {
 
     private void initializeTopology() {
         background = graph.getGraphBackground();
-        background.setTitle(ConsoleLocale.getString("title_service_cluster_gray_release"));
+        background.setTitle(ConsoleLocaleFactory.getString("title_service_cluster_gray_release"));
         graph.setBlinkingRule(new BlinkingRule() {
             public boolean isBodyBlinking(Element element) {
                 return element.getAlarmState().getHighestNativeAlarmSeverity() != null || element.getClientProperty(TWaverConst.PROPERTYNAME_RENDER_COLOR) != null;
@@ -377,7 +377,7 @@ public class ServiceTopology extends AbstractTopology {
     private String getNodeName(Instance instance) {
         StringBuilder stringBuilder = new StringBuilder();
         if (StringUtils.isNotEmpty(instance.getServiceType())) {
-            stringBuilder.append(ConsoleLocale.getString("type_" + instance.getServiceType())).append(" - ");
+            stringBuilder.append(ConsoleLocaleFactory.getString("type_" + instance.getServiceType())).append(" - ");
         }
         stringBuilder.append(instance.getHost()).append(":").append(instance.getPort());
         if (StringUtils.isNotEmpty(instance.getVersion())) {
@@ -456,7 +456,7 @@ public class ServiceTopology extends AbstractTopology {
         try {
             updateGrayState(node);
         } catch (Exception e) {
-            JExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocale.getString("query_data_failure"), e);
+            JExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocaleFactory.getString("query_data_failure"), e);
 
             group.removeChild(node);
             dataBox.removeElement(node);
@@ -481,7 +481,7 @@ public class ServiceTopology extends AbstractTopology {
             try {
                 updateGrayState(node);
             } catch (Exception e) {
-                JExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocale.getString("query_data_failure"), e);
+                JExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocaleFactory.getString("query_data_failure"), e);
 
                 iterator.remove();
                 dataBox.removeElement(node);
@@ -503,7 +503,7 @@ public class ServiceTopology extends AbstractTopology {
         }
         resultTextArea.setText(result.toString());
 
-        JBasicOptionPane.showOptionDialog(HandleManager.getFrame(this), new JBasicScrollPane(resultTextArea), ConsoleLocale.getString("execute_result"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/edit.png"), new Object[] { SwingLocale.getString("close") }, null, true);
+        JBasicOptionPane.showOptionDialog(HandleManager.getFrame(this), new JBasicScrollPane(resultTextArea), ConsoleLocaleFactory.getString("execute_result"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/edit.png"), new Object[] { SwingLocale.getString("close") }, null, true);
     }
 
     private void showMetadata(Instance instance) {
@@ -527,7 +527,7 @@ public class ServiceTopology extends AbstractTopology {
         }
         metadataTextArea.setText(result);
 
-        JBasicOptionPane.showOptionDialog(HandleManager.getFrame(this), new JBasicScrollPane(metadataTextArea), ConsoleLocale.getString("show_metadata"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/property.png"), new Object[] { SwingLocale.getString("close") }, null, true);
+        JBasicOptionPane.showOptionDialog(HandleManager.getFrame(this), new JBasicScrollPane(metadataTextArea), ConsoleLocaleFactory.getString("show_metadata"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/property.png"), new Object[] { SwingLocale.getString("close") }, null, true);
     }
 
     @Override
@@ -545,7 +545,7 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private JSecurityAction createShowTopologyAction() {
-        JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("show_topology"), ConsoleIconFactory.getSwingIcon("component/ui_16.png"), ConsoleLocale.getString("show_topology")) {
+        JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("show_topology"), ConsoleIconFactory.getSwingIcon("component/ui_16.png"), ConsoleLocaleFactory.getString("show_topology")) {
             private static final long serialVersionUID = 1L;
 
             @SuppressWarnings("unchecked")
@@ -554,7 +554,7 @@ public class ServiceTopology extends AbstractTopology {
                 try {
                     groups = ServiceController.getGroups();
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("get_service_group_failure"), ex);
+                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_group_failure"), ex);
 
                     return;
                 }
@@ -564,7 +564,7 @@ public class ServiceTopology extends AbstractTopology {
                     filterElementNodes.add(new ElementNode(filter, IconFactory.getSwingIcon("component/file_chooser_16.png"), filter));
                 }
 
-                JCheckBoxSelector checkBoxSelector = new JCheckBoxSelector(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("service_cluster_filter"), new Dimension(400, 350), filterElementNodes);
+                JCheckBoxSelector checkBoxSelector = new JCheckBoxSelector(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("service_cluster_filter"), new Dimension(400, 350), filterElementNodes);
                 checkBoxSelector.setVisible(true);
                 checkBoxSelector.dispose();
 
@@ -580,14 +580,14 @@ public class ServiceTopology extends AbstractTopology {
                 try {
                     instanceMap = ServiceController.getInstanceMap(filters);
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("get_service_instances_failure"), ex);
+                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_instances_failure"), ex);
 
                     return;
                 }
 
                 globalInstanceMap = instanceMap;
 
-                String title = ConsoleLocale.getString("title_service_cluster_gray_release") + " " + (CollectionUtils.isNotEmpty(filters) ? filters : StringUtils.EMPTY);
+                String title = ConsoleLocaleFactory.getString("title_service_cluster_gray_release") + " " + (CollectionUtils.isNotEmpty(filters) ? filters : StringUtils.EMPTY);
                 background.setTitle(title);
 
                 showTopology();
@@ -598,26 +598,26 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private JSecurityAction createExecuteGrayReleaseAction() {
-        JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("execute_gray_release"), ConsoleIconFactory.getSwingIcon("netbean/action_16.png"), ConsoleLocale.getString("execute_gray_release")) {
+        JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("execute_gray_release"), ConsoleIconFactory.getSwingIcon("netbean/action_16.png"), ConsoleLocaleFactory.getString("execute_gray_release")) {
             private static final long serialVersionUID = 1L;
 
             public void execute(ActionEvent e) {
                 TGroup group = TElementManager.getSelectedGroup(dataBox);
                 TNode node = TElementManager.getSelectedNode(dataBox);
                 if (group == null && node == null) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("select_a_group_or_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("select_a_group_or_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
 
                 if (group != null && !isPlugin(group)) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("group_not_for_gray_release"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("group_not_for_gray_release"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
 
                 if (node != null && !isPlugin(node)) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("node_not_for_gray_release"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("node_not_for_gray_release"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
@@ -651,7 +651,7 @@ public class ServiceTopology extends AbstractTopology {
                     description = instance.getServiceId() + " [" + instance.getHost() + ":" + instance.getPort() + "]";
                 }
 
-                JBasicOptionPane.showOptionDialog(HandleManager.getFrame(ServiceTopology.this), grayPanel, ConsoleLocale.getString("execute_gray_release") + " - " + description, JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/navigator.png"), new Object[] { SwingLocale.getString("close") }, null, true);
+                JBasicOptionPane.showOptionDialog(HandleManager.getFrame(ServiceTopology.this), grayPanel, ConsoleLocaleFactory.getString("execute_gray_release") + " - " + description, JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/navigator.png"), new Object[] { SwingLocale.getString("close") }, null, true);
             }
         };
 
@@ -659,19 +659,19 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private JSecurityAction createExecuteGrayRouterAction() {
-        JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("execute_gray_router"), ConsoleIconFactory.getSwingIcon("netbean/close_path_16.png"), ConsoleLocale.getString("execute_gray_router")) {
+        JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("execute_gray_router"), ConsoleIconFactory.getSwingIcon("netbean/close_path_16.png"), ConsoleLocaleFactory.getString("execute_gray_router")) {
             private static final long serialVersionUID = 1L;
 
             public void execute(ActionEvent e) {
                 TNode node = TElementManager.getSelectedNode(dataBox);
                 if (node == null) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("select_a_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("select_a_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
 
                 if (node != null && !isPlugin(node)) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("node_not_for_gray_router"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("node_not_for_gray_router"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
@@ -689,7 +689,7 @@ public class ServiceTopology extends AbstractTopology {
 
                 String description = instance.getServiceId() + " [" + instance.getHost() + ":" + instance.getPort() + "]";
 
-                JBasicOptionPane.showOptionDialog(HandleManager.getFrame(ServiceTopology.this), routerTopology, ConsoleLocale.getString("execute_gray_router") + " - " + description, JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/navigator.png"), new Object[] { SwingLocale.getString("close") }, null, true);
+                JBasicOptionPane.showOptionDialog(HandleManager.getFrame(ServiceTopology.this), routerTopology, ConsoleLocaleFactory.getString("execute_gray_router") + " - " + description, JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/navigator.png"), new Object[] { SwingLocale.getString("close") }, null, true);
             }
         };
 
@@ -697,26 +697,26 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private JSecurityAction createRefreshGrayStateAction() {
-        JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("refresh_gray_state"), ConsoleIconFactory.getSwingIcon("netbean/rotate_16.png"), ConsoleLocale.getString("refresh_gray_state")) {
+        JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("refresh_gray_state"), ConsoleIconFactory.getSwingIcon("netbean/rotate_16.png"), ConsoleLocaleFactory.getString("refresh_gray_state")) {
             private static final long serialVersionUID = 1L;
 
             public void execute(ActionEvent e) {
                 TGroup group = TElementManager.getSelectedGroup(dataBox);
                 TNode node = TElementManager.getSelectedNode(dataBox);
                 if (group == null && node == null) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("select_a_group_or_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("select_a_group_or_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
 
                 if (group != null && !isPlugin(group)) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("group_not_for_refresh_gray_state"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("group_not_for_refresh_gray_state"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
 
                 if (node != null && !isPlugin(node)) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("node_not_for_refresh_gray_state"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("node_not_for_refresh_gray_state"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
@@ -733,20 +733,20 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private JSecurityAction createShowMetadataAction() {
-        JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("show_metadata"), ConsoleIconFactory.getSwingIcon("component/file_chooser_16.png"), ConsoleLocale.getString("show_metadata")) {
+        JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("show_metadata"), ConsoleIconFactory.getSwingIcon("component/file_chooser_16.png"), ConsoleLocaleFactory.getString("show_metadata")) {
             private static final long serialVersionUID = 1L;
 
             public void execute(ActionEvent e) {
                 TNode node = TElementManager.getSelectedNode(dataBox);
                 if (node == null) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("select_a_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("select_a_node"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
 
                 Object userObject = node.getUserObject();
                 if (userObject == null || !(userObject instanceof Instance)) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("node_has_no_metadata"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("node_has_no_metadata"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
@@ -761,12 +761,12 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private JSecurityAction createPushGlobalConfigAction() {
-        JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("push_global_config"), ConsoleIconFactory.getSwingIcon("netbean/ease_both_16.png"), ConsoleLocale.getString("push_global_config")) {
+        JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("push_global_config"), ConsoleIconFactory.getSwingIcon("netbean/ease_both_16.png"), ConsoleLocaleFactory.getString("push_global_config")) {
             private static final long serialVersionUID = 1L;
 
             public void execute(ActionEvent e) {
                 if (!ruleToConfigCenterRadioButtonMenuItem.isSelected()) {
-                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("not_for_push_global_config"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                    JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("not_for_push_global_config"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                     return;
                 }
@@ -775,7 +775,7 @@ public class ServiceTopology extends AbstractTopology {
                 try {
                     groups = ServiceController.getGroups();
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("get_service_group_failure"), ex);
+                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_group_failure"), ex);
 
                     return;
                 }
@@ -789,7 +789,7 @@ public class ServiceTopology extends AbstractTopology {
 
                 globalGrayPanel.setFilters(globalFilterVector);
 
-                JBasicOptionPane.showOptionDialog(HandleManager.getFrame(ServiceTopology.this), globalGrayPanel, ConsoleLocale.getString("push_global_config"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/navigator.png"), new Object[] { SwingLocale.getString("close") }, null, true);
+                JBasicOptionPane.showOptionDialog(HandleManager.getFrame(ServiceTopology.this), globalGrayPanel, ConsoleLocaleFactory.getString("push_global_config"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/navigator.png"), new Object[] { SwingLocale.getString("close") }, null, true);
             }
         };
 
@@ -850,15 +850,15 @@ public class ServiceTopology extends AbstractTopology {
             JDockable dockable = (JDockable) getDockableContainer().getContentPane();
 
             JDockableView filterView = (JDockableView) dockable.getPaneAt(0);
-            filterView.setTitle(ConsoleLocale.getString("global_group"));
+            filterView.setTitle(ConsoleLocaleFactory.getString("global_group"));
             filterView.setIcon(ConsoleIconFactory.getSwingIcon("netbean/stack_16.png"));
-            filterView.setToolTipText(ConsoleLocale.getString("global_group"));
+            filterView.setToolTipText(ConsoleLocaleFactory.getString("global_group"));
             filterView.add(filterPanel);
 
             JDockableView ruleView = (JDockableView) dockable.getPaneAt(1);
-            ruleView.setTitle(ConsoleLocale.getString("global_rule"));
+            ruleView.setTitle(ConsoleLocaleFactory.getString("global_rule"));
             ruleView.setIcon(ConsoleIconFactory.getSwingIcon("netbean/custom_node_16.png"));
-            ruleView.setToolTipText(ConsoleLocale.getString("global_rule"));
+            ruleView.setToolTipText(ConsoleLocaleFactory.getString("global_rule"));
             ruleView.add(rulePanel);
         }
 
@@ -869,20 +869,20 @@ public class ServiceTopology extends AbstractTopology {
         }
 
         private JSecurityAction createUpdateRuleAction() {
-            JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("button_update_rule"), ConsoleIconFactory.getSwingIcon("save.png"), ConsoleLocale.getString("button_update_rule")) {
+            JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("button_update_rule"), ConsoleIconFactory.getSwingIcon("save.png"), ConsoleLocaleFactory.getString("button_update_rule")) {
                 private static final long serialVersionUID = 1L;
 
                 public void execute(ActionEvent e) {
                     int selectedRow = filterList.getSelectedIndex();
                     if (selectedRow < 0) {
-                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("select_a_global_group"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("select_a_global_group"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                         return;
                     }
 
                     String rule = ruleTextArea.getText();
                     if (StringUtils.isEmpty(rule)) {
-                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("gray_rule_not_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("gray_rule_not_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                         return;
                     }
@@ -893,7 +893,7 @@ public class ServiceTopology extends AbstractTopology {
                     try {
                         result = ServiceController.remoteConfigUpdate(filter, filter, rule);
                     } catch (Exception ex) {
-                        JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                        JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                         return;
                     }
@@ -906,13 +906,13 @@ public class ServiceTopology extends AbstractTopology {
         }
 
         private JSecurityAction createClearRuleAction() {
-            JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("button_clear_rule"), ConsoleIconFactory.getSwingIcon("paint.png"), ConsoleLocale.getString("button_clear_rule")) {
+            JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("button_clear_rule"), ConsoleIconFactory.getSwingIcon("paint.png"), ConsoleLocaleFactory.getString("button_clear_rule")) {
                 private static final long serialVersionUID = 1L;
 
                 public void execute(ActionEvent e) {
                     int selectedRow = filterList.getSelectedIndex();
                     if (selectedRow < 0) {
-                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("select_a_global_group"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("select_a_global_group"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                         return;
                     }
@@ -923,7 +923,7 @@ public class ServiceTopology extends AbstractTopology {
                     try {
                         result = ServiceController.remoteConfigClear(filter, filter);
                     } catch (Exception ex) {
-                        JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                        JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                         return;
                     }
@@ -982,8 +982,8 @@ public class ServiceTopology extends AbstractTopology {
 
             versionTabbedPane = new JBasicTabbedPane();
             versionTabbedPane.setPreferredSize(new Dimension(versionTabbedPane.getPreferredSize().width, 75));
-            versionTabbedPane.addTab(ConsoleLocale.getString("label_dynamic_version"), dynamicVersionPanel, ConsoleLocale.getString("label_dynamic_version"));
-            versionTabbedPane.addTab(ConsoleLocale.getString("label_local_version"), localVersionPanel, ConsoleLocale.getString("label_local_version"));
+            versionTabbedPane.addTab(ConsoleLocaleFactory.getString("label_dynamic_version"), dynamicVersionPanel, ConsoleLocaleFactory.getString("label_dynamic_version"));
+            versionTabbedPane.addTab(ConsoleLocaleFactory.getString("label_local_version"), localVersionPanel, ConsoleLocaleFactory.getString("label_local_version"));
 
             updateVersionButton = new JClassicButton(createUpdateVersionAction());
             updateVersionButton.setPreferredSize(new Dimension(updateVersionButton.getPreferredSize().width, 30));
@@ -997,7 +997,7 @@ public class ServiceTopology extends AbstractTopology {
             toolBar.add(clearVersionButton);
             ButtonManager.updateUI(toolBar);
 
-            versionInfoLabel = new JLabel(ConsoleLocale.getString("description_gray_version"), IconFactory.getSwingIcon("question_message.png"), SwingConstants.LEADING);
+            versionInfoLabel = new JLabel(ConsoleLocaleFactory.getString("description_gray_version"), IconFactory.getSwingIcon("question_message.png"), SwingConstants.LEADING);
 
             JPanel layoutPanel = new JPanel();
             layoutPanel.setLayout(new FiledLayout(FiledLayout.COLUMN, FiledLayout.FULL, 5));
@@ -1005,7 +1005,7 @@ public class ServiceTopology extends AbstractTopology {
             layoutPanel.add(toolBar);
 
             JPanel panel = new JPanel();
-            panel.setBorder(UIFactory.createTitledBorder(ConsoleLocale.getString("title_gray_version_operation")));
+            panel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_version_operation")));
             panel.setLayout(new BorderLayout());
             panel.add(versionTabbedPane, BorderLayout.CENTER);
             panel.add(layoutPanel, BorderLayout.SOUTH);
@@ -1028,8 +1028,8 @@ public class ServiceTopology extends AbstractTopology {
             localRulePanel.add(new JBasicScrollPane(localRuleTextArea), BorderLayout.CENTER);
 
             ruleTabbedPane = new JBasicTabbedPane();
-            ruleTabbedPane.addTab(ConsoleLocale.getString("label_dynamic_rule"), dynamicRulePanel, ConsoleLocale.getString("label_dynamic_rule"));
-            ruleTabbedPane.addTab(ConsoleLocale.getString("label_local_rule"), localRulePanel, ConsoleLocale.getString("label_local_rule"));
+            ruleTabbedPane.addTab(ConsoleLocaleFactory.getString("label_dynamic_rule"), dynamicRulePanel, ConsoleLocaleFactory.getString("label_dynamic_rule"));
+            ruleTabbedPane.addTab(ConsoleLocaleFactory.getString("label_local_rule"), localRulePanel, ConsoleLocaleFactory.getString("label_local_rule"));
 
             updateRuleButton = new JClassicButton(createUpdateRuleAction());
             updateRuleButton.setPreferredSize(new Dimension(updateRuleButton.getPreferredSize().width, 30));
@@ -1043,7 +1043,7 @@ public class ServiceTopology extends AbstractTopology {
             toolBar.add(clearRuleButton);
             ButtonManager.updateUI(toolBar);
 
-            ruleInfoLabel = new JLabel(ConsoleLocale.getString("description_gray_rule_to_config_center"), IconFactory.getSwingIcon("question_message.png"), SwingConstants.LEADING);
+            ruleInfoLabel = new JLabel(ConsoleLocaleFactory.getString("description_gray_rule_to_config_center"), IconFactory.getSwingIcon("question_message.png"), SwingConstants.LEADING);
 
             JPanel layoutPanel = new JPanel();
             layoutPanel.setLayout(new FiledLayout(FiledLayout.COLUMN, FiledLayout.FULL, 5));
@@ -1051,7 +1051,7 @@ public class ServiceTopology extends AbstractTopology {
             layoutPanel.add(toolBar);
 
             JPanel panel = new JPanel();
-            panel.setBorder(UIFactory.createTitledBorder(ConsoleLocale.getString("title_gray_rule_operation")));
+            panel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_rule_operation")));
             panel.setLayout(new BorderLayout());
             panel.add(ruleTabbedPane, BorderLayout.CENTER);
             panel.add(layoutPanel, BorderLayout.SOUTH);
@@ -1091,15 +1091,15 @@ public class ServiceTopology extends AbstractTopology {
 
             dynamicVersionTextField.setText(StringUtils.EMPTY);
             localVersionTextField.setText(StringUtils.EMPTY);
-            updateVersionButton.setText(ConsoleLocale.getString("button_batch_update_version"));
-            clearVersionButton.setText(ConsoleLocale.getString("button_batch_clear_version"));
+            updateVersionButton.setText(ConsoleLocaleFactory.getString("button_batch_update_version"));
+            clearVersionButton.setText(ConsoleLocaleFactory.getString("button_batch_clear_version"));
             updateVersionButton.setEnabled(versionControlEnabled);
             clearVersionButton.setEnabled(versionControlEnabled);
 
             dynamicRuleTextArea.setText(StringUtils.EMPTY);
             localRuleTextArea.setText(StringUtils.EMPTY);
-            updateRuleButton.setText(ConsoleLocale.getString("button_batch_update_rule"));
-            clearRuleButton.setText(ConsoleLocale.getString("button_batch_clear_rule"));
+            updateRuleButton.setText(ConsoleLocaleFactory.getString("button_batch_update_rule"));
+            clearRuleButton.setText(ConsoleLocaleFactory.getString("button_batch_clear_rule"));
             updateRuleButton.setEnabled(ruleControlEnabled);
             clearRuleButton.setEnabled(ruleControlEnabled);
 
@@ -1109,9 +1109,9 @@ public class ServiceTopology extends AbstractTopology {
                 String serviceId = group.getUserObject().toString();
                 String config = ServiceController.remoteConfigView(filter, serviceId);
                 dynamicRuleTextArea.setText(config);
-                ruleInfo = ConsoleLocale.getString("description_gray_rule_to_config_center");
+                ruleInfo = ConsoleLocaleFactory.getString("description_gray_rule_to_config_center");
             } else {
-                ruleInfo = ConsoleLocale.getString("description_gray_rule_to_service");
+                ruleInfo = ConsoleLocaleFactory.getString("description_gray_rule_to_service");
             }
 
             ruleInfoLabel.setText(ruleInfo);
@@ -1126,44 +1126,44 @@ public class ServiceTopology extends AbstractTopology {
             boolean ruleControlEnabled = InstanceEntityWrapper.isDiscoveryControlEnabled(instance) && InstanceEntityWrapper.isConfigRestControlEnabled(instance) && !ruleToConfigCenterRadioButtonMenuItem.isSelected();
 
             if (versionTabbedPane.getTabCount() == 1) {
-                versionTabbedPane.addTab(ConsoleLocale.getString("label_local_version"), localVersionPanel, ConsoleLocale.getString("label_local_version"));
+                versionTabbedPane.addTab(ConsoleLocaleFactory.getString("label_local_version"), localVersionPanel, ConsoleLocaleFactory.getString("label_local_version"));
             }
             if (ruleTabbedPane.getTabCount() == 1) {
-                ruleTabbedPane.addTab(ConsoleLocale.getString("label_local_rule"), localRulePanel, ConsoleLocale.getString("label_local_rule"));
+                ruleTabbedPane.addTab(ConsoleLocaleFactory.getString("label_local_rule"), localRulePanel, ConsoleLocaleFactory.getString("label_local_rule"));
             }
 
             dynamicVersionTextField.setText(instance.getDynamicVersion());
             localVersionTextField.setText(instance.getVersion());
-            updateVersionButton.setText(ConsoleLocale.getString("button_update_version"));
-            clearVersionButton.setText(ConsoleLocale.getString("button_clear_version"));
+            updateVersionButton.setText(ConsoleLocaleFactory.getString("button_update_version"));
+            clearVersionButton.setText(ConsoleLocaleFactory.getString("button_clear_version"));
             updateVersionButton.setEnabled(versionControlEnabled);
             clearVersionButton.setEnabled(versionControlEnabled);
 
             dynamicRuleTextArea.setText(instance.getDynamicRule());
             localRuleTextArea.setText(instance.getRule());
-            updateRuleButton.setText(ConsoleLocale.getString("button_update_rule"));
-            clearRuleButton.setText(ConsoleLocale.getString("button_clear_rule"));
+            updateRuleButton.setText(ConsoleLocaleFactory.getString("button_update_rule"));
+            clearRuleButton.setText(ConsoleLocaleFactory.getString("button_clear_rule"));
             updateRuleButton.setEnabled(ruleControlEnabled);
             clearRuleButton.setEnabled(ruleControlEnabled);
 
             String ruleInfo = null;
             if (ruleToConfigCenterRadioButtonMenuItem.isSelected()) {
-                ruleInfo = ConsoleLocale.getString("description_gray_rule_to_config_center");
+                ruleInfo = ConsoleLocaleFactory.getString("description_gray_rule_to_config_center");
             } else {
-                ruleInfo = ConsoleLocale.getString("description_gray_rule_to_service");
+                ruleInfo = ConsoleLocaleFactory.getString("description_gray_rule_to_service");
             }
 
             ruleInfoLabel.setText(ruleInfo);
         }
 
         private JSecurityAction createUpdateVersionAction() {
-            JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("button_update_version"), ConsoleIconFactory.getSwingIcon("save.png"), ConsoleLocale.getString("button_update_version")) {
+            JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("button_update_version"), ConsoleIconFactory.getSwingIcon("save.png"), ConsoleLocaleFactory.getString("button_update_version")) {
                 private static final long serialVersionUID = 1L;
 
                 public void execute(ActionEvent e) {
                     String dynamicVersion = dynamicVersionTextField.getText();
                     if (StringUtils.isEmpty(dynamicVersion)) {
-                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("gray_version_not_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("gray_version_not_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                         return;
                     }
@@ -1174,7 +1174,7 @@ public class ServiceTopology extends AbstractTopology {
                         try {
                             results = ServiceController.versionUpdate(serviceId, dynamicVersion, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(group);
 
@@ -1191,7 +1191,7 @@ public class ServiceTopology extends AbstractTopology {
                         try {
                             result = ServiceController.versionUpdate(instance, dynamicVersion, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1209,7 +1209,7 @@ public class ServiceTopology extends AbstractTopology {
         }
 
         private JSecurityAction createClearVersionAction() {
-            JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("button_clear_version"), ConsoleIconFactory.getSwingIcon("paint.png"), ConsoleLocale.getString("button_clear_version")) {
+            JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("button_clear_version"), ConsoleIconFactory.getSwingIcon("paint.png"), ConsoleLocaleFactory.getString("button_clear_version")) {
                 private static final long serialVersionUID = 1L;
 
                 public void execute(ActionEvent e) {
@@ -1219,7 +1219,7 @@ public class ServiceTopology extends AbstractTopology {
                         try {
                             results = ServiceController.versionClear(serviceId, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(group);
 
@@ -1236,7 +1236,7 @@ public class ServiceTopology extends AbstractTopology {
                         try {
                             result = ServiceController.versionClear(instance, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1254,13 +1254,13 @@ public class ServiceTopology extends AbstractTopology {
         }
 
         private JSecurityAction createUpdateRuleAction() {
-            JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("button_update_rule"), ConsoleIconFactory.getSwingIcon("save.png"), ConsoleLocale.getString("button_update_rule")) {
+            JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("button_update_rule"), ConsoleIconFactory.getSwingIcon("save.png"), ConsoleLocaleFactory.getString("button_update_rule")) {
                 private static final long serialVersionUID = 1L;
 
                 public void execute(ActionEvent e) {
                     String dynamicRule = dynamicRuleTextArea.getText();
                     if (StringUtils.isEmpty(dynamicRule)) {
-                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("gray_rule_not_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
+                        JBasicOptionPane.showMessageDialog(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("gray_rule_not_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
                         return;
                     }
@@ -1274,7 +1274,7 @@ public class ServiceTopology extends AbstractTopology {
                             try {
                                 result = ServiceController.remoteConfigUpdate(filter, serviceId, dynamicRule);
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1287,7 +1287,7 @@ public class ServiceTopology extends AbstractTopology {
                             try {
                                 results = ServiceController.configUpdate(serviceId, dynamicRule, pushAsyncModeRadioButtonMenuItem.isSelected());
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1305,7 +1305,7 @@ public class ServiceTopology extends AbstractTopology {
                         try {
                             result = ServiceController.configUpdate(instance, dynamicRule, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1323,7 +1323,7 @@ public class ServiceTopology extends AbstractTopology {
         }
 
         private JSecurityAction createClearRuleAction() {
-            JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("button_clear_rule"), ConsoleIconFactory.getSwingIcon("paint.png"), ConsoleLocale.getString("button_clear_rule")) {
+            JSecurityAction action = new JSecurityAction(ConsoleLocaleFactory.getString("button_clear_rule"), ConsoleIconFactory.getSwingIcon("paint.png"), ConsoleLocaleFactory.getString("button_clear_rule")) {
                 private static final long serialVersionUID = 1L;
 
                 public void execute(ActionEvent e) {
@@ -1335,7 +1335,7 @@ public class ServiceTopology extends AbstractTopology {
                             try {
                                 result = ServiceController.remoteConfigClear(filter, serviceId);
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1348,7 +1348,7 @@ public class ServiceTopology extends AbstractTopology {
                             try {
                                 results = ServiceController.configClear(serviceId, pushAsyncModeRadioButtonMenuItem.isSelected());
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1366,7 +1366,7 @@ public class ServiceTopology extends AbstractTopology {
                         try {
                             result = ServiceController.configClear(instance, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocale.getString("query_data_failure"), ex);
+                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1421,26 +1421,26 @@ public class ServiceTopology extends AbstractTopology {
 
             JPanel groupPanel = new JPanel();
             groupPanel.setLayout(tableLayout);
-            groupPanel.setBorder(UIFactory.createTitledBorder(ConsoleLocale.getString("group_layout")));
-            groupPanel.add(new JBasicLabel(ConsoleLocale.getString("start_x")), "0, 0");
+            groupPanel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("group_layout")));
+            groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_x")), "0, 0");
             groupPanel.add(groupStartXTextField, "1, 0");
-            groupPanel.add(new JBasicLabel(ConsoleLocale.getString("start_y")), "2, 0");
+            groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_y")), "2, 0");
             groupPanel.add(groupStartYTextField, "3, 0");
-            groupPanel.add(new JBasicLabel(ConsoleLocale.getString("horizontal_gap")), "0, 1");
+            groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("horizontal_gap")), "0, 1");
             groupPanel.add(groupHorizontalGapTextField, "1, 1");
-            groupPanel.add(new JBasicLabel(ConsoleLocale.getString("vertical_gap")), "2, 1");
+            groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("vertical_gap")), "2, 1");
             groupPanel.add(groupVerticalGapTextField, "3, 1");
 
             JPanel nodePanel = new JPanel();
             nodePanel.setLayout(tableLayout);
-            nodePanel.setBorder(UIFactory.createTitledBorder(ConsoleLocale.getString("node_layout")));
-            nodePanel.add(new JBasicLabel(ConsoleLocale.getString("start_x")), "0, 0");
+            nodePanel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("node_layout")));
+            nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_x")), "0, 0");
             nodePanel.add(nodeStartXTextField, "1, 0");
-            nodePanel.add(new JBasicLabel(ConsoleLocale.getString("start_y")), "2, 0");
+            nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_y")), "2, 0");
             nodePanel.add(nodeStartYTextField, "3, 0");
-            nodePanel.add(new JBasicLabel(ConsoleLocale.getString("horizontal_gap")), "0, 1");
+            nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("horizontal_gap")), "0, 1");
             nodePanel.add(nodeHorizontalGapTextField, "1, 1");
-            nodePanel.add(new JBasicLabel(ConsoleLocale.getString("vertical_gap")), "2, 1");
+            nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("vertical_gap")), "2, 1");
             nodePanel.add(nodeVerticalGapTextField, "3, 1");
 
             JPanel panel = new JPanel();
