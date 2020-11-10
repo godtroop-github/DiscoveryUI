@@ -54,12 +54,12 @@ import com.nepxion.discovery.console.desktop.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.entity.Instance;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
+import com.nepxion.discovery.console.desktop.topology.AbstractTopology;
+import com.nepxion.discovery.console.desktop.topology.NodeImageType;
+import com.nepxion.discovery.console.desktop.topology.NodeLocation;
+import com.nepxion.discovery.console.desktop.topology.NodeSizeType;
+import com.nepxion.discovery.console.desktop.topology.NodeUI;
 import com.nepxion.discovery.console.desktop.ui.UIFactory;
-import com.nepxion.discovery.console.desktop.workspace.topology.AbstractTopology;
-import com.nepxion.discovery.console.desktop.workspace.topology.LocationEntity;
-import com.nepxion.discovery.console.desktop.workspace.topology.TopologyEntity;
-import com.nepxion.discovery.console.desktop.workspace.topology.TopologyEntityType;
-import com.nepxion.discovery.console.desktop.workspace.topology.TopologyStyleType;
 import com.nepxion.swing.action.JSecurityAction;
 import com.nepxion.swing.button.ButtonManager;
 import com.nepxion.swing.button.JClassicButton;
@@ -92,12 +92,12 @@ import com.nepxion.swing.textfield.number.JNumberTextField;
 public class ServiceTopology extends AbstractTopology {
     private static final long serialVersionUID = 1L;
 
-    private LocationEntity groupLocationEntity = new LocationEntity(120, 250, 280, 0);
-    private LocationEntity nodeLocationEntity = new LocationEntity(0, 0, 120, 150);
-    private TopologyEntity serviceGroupEntity = new TopologyEntity(TopologyEntityType.SERVICE_GROUP, TopologyStyleType.LARGE, true);
-    private TopologyEntity notServiceGroupEntity = new TopologyEntity(TopologyEntityType.GATEWAY_GROUP, TopologyStyleType.LARGE, true);
-    private TopologyEntity serviceNodeEntity = new TopologyEntity(TopologyEntityType.SERVICE, TopologyStyleType.MIDDLE, false);
-    private TopologyEntity notServiceNodeEntity = new TopologyEntity(TopologyEntityType.GATEWAY, TopologyStyleType.MIDDLE, false);
+    private NodeLocation groupLocation = new NodeLocation(120, 250, 280, 0);
+    private NodeLocation nodeLocation = new NodeLocation(0, 0, 120, 150);
+    private NodeUI groupUI = new NodeUI(NodeImageType.SERVICE_GROUP, NodeSizeType.LARGE, true);
+    private NodeUI notGroupEntity = new NodeUI(NodeImageType.GATEWAY_GROUP, NodeSizeType.LARGE, true);
+    private NodeUI nodeUI = new NodeUI(NodeImageType.SERVICE, NodeSizeType.MIDDLE, false);
+    private NodeUI notNodeUI = new NodeUI(NodeImageType.GATEWAY, NodeSizeType.MIDDLE, false);
     private Map<String, Point> groupLocationMap = new HashMap<String, Point>();
 
     private TGraphBackground background;
@@ -257,7 +257,7 @@ public class ServiceTopology extends AbstractTopology {
         int count = groupLocationMap.size();
         String groupName = getGroupName(serviceId, instances.size(), filter);
 
-        TGroup group = createGroup(groupName, StringUtils.isNotEmpty(plugin) ? serviceGroupEntity : notServiceGroupEntity, groupLocationEntity, count);
+        TGroup group = createGroup(groupName, StringUtils.isNotEmpty(plugin) ? groupUI : notGroupEntity, groupLocation, count);
         group.setGroupType(TGroupType.ELLIPSE_GROUP_TYPE.getType());
         group.setUserObject(serviceId);
         setFilter(group, filter);
@@ -273,7 +273,7 @@ public class ServiceTopology extends AbstractTopology {
             String plugin = InstanceEntityWrapper.getPlugin(instance);
             String nodeName = getNodeName(instance);
 
-            TNode node = createNode(nodeName, StringUtils.isNotEmpty(plugin) ? serviceNodeEntity : notServiceNodeEntity, nodeLocationEntity, i);
+            TNode node = createNode(nodeName, StringUtils.isNotEmpty(plugin) ? nodeUI : notNodeUI, nodeLocation, i);
             node.setUserObject(instance);
             setFilter(node, filter);
             setPlugin(node, plugin);
@@ -1464,15 +1464,15 @@ public class ServiceTopology extends AbstractTopology {
         }
 
         public void setToUI() {
-            groupStartXTextField.setText(groupLocationEntity.getStartX() + StringUtils.EMPTY);
-            groupStartYTextField.setText(groupLocationEntity.getStartY() + StringUtils.EMPTY);
-            groupHorizontalGapTextField.setText(groupLocationEntity.getHorizontalGap() + StringUtils.EMPTY);
-            groupVerticalGapTextField.setText(groupLocationEntity.getVerticalGap() + StringUtils.EMPTY);
+            groupStartXTextField.setText(groupLocation.getStartX() + StringUtils.EMPTY);
+            groupStartYTextField.setText(groupLocation.getStartY() + StringUtils.EMPTY);
+            groupHorizontalGapTextField.setText(groupLocation.getHorizontalGap() + StringUtils.EMPTY);
+            groupVerticalGapTextField.setText(groupLocation.getVerticalGap() + StringUtils.EMPTY);
 
-            nodeStartXTextField.setText(nodeLocationEntity.getStartX() + StringUtils.EMPTY);
-            nodeStartYTextField.setText(nodeLocationEntity.getStartY() + StringUtils.EMPTY);
-            nodeHorizontalGapTextField.setText(nodeLocationEntity.getHorizontalGap() + StringUtils.EMPTY);
-            nodeVerticalGapTextField.setText(nodeLocationEntity.getVerticalGap() + StringUtils.EMPTY);
+            nodeStartXTextField.setText(nodeLocation.getStartX() + StringUtils.EMPTY);
+            nodeStartYTextField.setText(nodeLocation.getStartY() + StringUtils.EMPTY);
+            nodeHorizontalGapTextField.setText(nodeLocation.getHorizontalGap() + StringUtils.EMPTY);
+            nodeVerticalGapTextField.setText(nodeLocation.getVerticalGap() + StringUtils.EMPTY);
         }
 
         public boolean setFromUI() {
@@ -1499,15 +1499,15 @@ public class ServiceTopology extends AbstractTopology {
                 return false;
             }
 
-            groupLocationEntity.setStartX(groupStartX);
-            groupLocationEntity.setStartY(groupStartY);
-            groupLocationEntity.setHorizontalGap(groupHorizontalGap);
-            groupLocationEntity.setVerticalGap(groupVerticalGap);
+            groupLocation.setStartX(groupStartX);
+            groupLocation.setStartY(groupStartY);
+            groupLocation.setHorizontalGap(groupHorizontalGap);
+            groupLocation.setVerticalGap(groupVerticalGap);
 
-            nodeLocationEntity.setStartX(nodeStartX);
-            nodeLocationEntity.setStartY(nodeStartY);
-            nodeLocationEntity.setHorizontalGap(nodeHorizontalGap);
-            nodeLocationEntity.setVerticalGap(nodeVerticalGap);
+            nodeLocation.setStartX(nodeStartX);
+            nodeLocation.setStartY(nodeStartY);
+            nodeLocation.setHorizontalGap(nodeHorizontalGap);
+            nodeLocation.setVerticalGap(nodeVerticalGap);
 
             return true;
         }

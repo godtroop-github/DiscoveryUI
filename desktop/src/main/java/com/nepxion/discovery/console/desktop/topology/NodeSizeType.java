@@ -1,4 +1,4 @@
-package com.nepxion.discovery.console.desktop.workspace.topology;
+package com.nepxion.discovery.console.desktop.topology;
 
 /**
  * <p>Title: Nepxion Discovery</p>
@@ -9,7 +9,7 @@ package com.nepxion.discovery.console.desktop.workspace.topology;
  * @version 1.0
  */
 
-public enum TopologyStyleType {
+public enum NodeSizeType {
     LARGE,
     MIDDLE,
     SMALL

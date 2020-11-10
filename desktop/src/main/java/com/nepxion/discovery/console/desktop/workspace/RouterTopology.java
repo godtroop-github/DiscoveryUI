@@ -46,11 +46,11 @@ import com.nepxion.discovery.console.desktop.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.entity.Instance;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
-import com.nepxion.discovery.console.desktop.workspace.topology.AbstractTopology;
-import com.nepxion.discovery.console.desktop.workspace.topology.LocationEntity;
-import com.nepxion.discovery.console.desktop.workspace.topology.TopologyEntity;
-import com.nepxion.discovery.console.desktop.workspace.topology.TopologyEntityType;
-import com.nepxion.discovery.console.desktop.workspace.topology.TopologyStyleType;
+import com.nepxion.discovery.console.desktop.topology.AbstractTopology;
+import com.nepxion.discovery.console.desktop.topology.NodeLocation;
+import com.nepxion.discovery.console.desktop.topology.NodeUI;
+import com.nepxion.discovery.console.desktop.topology.NodeImageType;
+import com.nepxion.discovery.console.desktop.topology.NodeSizeType;
 import com.nepxion.swing.action.JSecurityAction;
 import com.nepxion.swing.button.ButtonManager;
 import com.nepxion.swing.button.JBasicButton;
@@ -72,8 +72,8 @@ import com.nepxion.swing.textfield.JBasicTextField;
 public class RouterTopology extends AbstractTopology {
     private static final long serialVersionUID = 1L;
 
-    private LocationEntity nodeLocationEntity = new LocationEntity(100, 200, 200, 0);
-    private TopologyEntity serviceNodeEntity = new TopologyEntity(TopologyEntityType.SERVICE, TopologyStyleType.MIDDLE, true);
+    private NodeLocation nodeLocation = new NodeLocation(100, 200, 200, 0);
+    private NodeUI nodeUI = new NodeUI(NodeImageType.SERVICE, NodeSizeType.MIDDLE, true);
 
     private TGraphBackground background;
     private JBasicMenuItem showRuleMenuItem;
@@ -275,7 +275,7 @@ public class RouterTopology extends AbstractTopology {
     private TNode addNode(Instance instance) {
         String nodeName = getNodeName(instance);
 
-        TNode node = createNode(nodeName, serviceNodeEntity, nodeLocationEntity, 0);
+        TNode node = createNode(nodeName, nodeUI, nodeLocation, 0);
         node.setUserObject(instance);
 
         dataBox.addElement(node);
@@ -286,7 +286,7 @@ public class RouterTopology extends AbstractTopology {
     private TNode addNode(RouterEntity routerEntity, int index) {
         String nodeName = getNodeName(routerEntity);
 
-        TNode node = createNode(nodeName, serviceNodeEntity, nodeLocationEntity, index);
+        TNode node = createNode(nodeName, nodeUI, nodeLocation, index);
         node.setUserObject(routerEntity);
 
         dataBox.addElement(node);
