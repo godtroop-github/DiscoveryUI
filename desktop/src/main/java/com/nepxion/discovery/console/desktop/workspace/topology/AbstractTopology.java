@@ -62,8 +62,8 @@ public abstract class AbstractTopology extends JPanel {
 
     public AbstractTopology() {
         setLayout(new BorderLayout());
-        add(createGraph());
-        // add(createGisGraph());
+        add(createGraph(), BorderLayout.CENTER);
+        // add(createGisGraph(), BorderLayout.CENTER);
 
         initializePopupMenu();
     }
@@ -85,7 +85,7 @@ public abstract class AbstractTopology extends JPanel {
             graph.setDataBox(dataBox);
             graph.getControlBarInternalFrame().setVisible(false);
 
-            final TGisGraph gisGraph = (TGisGraph) graph;
+            TGisGraph gisGraph = (TGisGraph) graph;
             GeographyMap map = gisGraph.getMap();
             map.setZoom(16);
             map.setCenterPoint(new GeoCoordinate(118.795896, 32.088683));
