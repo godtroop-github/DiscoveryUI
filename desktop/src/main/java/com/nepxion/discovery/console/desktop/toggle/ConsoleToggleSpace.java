@@ -34,7 +34,7 @@ public class ConsoleToggleSpace extends JPanel {
         JComponent contentPane = null;
 
         String name = listElementNode.getName();
-        if (name.equals(ConsoleToggleConstants.SERVICE_TOPOLOGY)) {
+        if (name.equals(ConsoleToggleConstant.SERVICE_TOPOLOGY)) {
             contentPane = new ServiceTopology();
         } else {
             contentPane = blankPane;

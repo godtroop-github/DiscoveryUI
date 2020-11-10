@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import com.nepxion.discovery.console.desktop.context.UIContext;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
-import com.nepxion.discovery.console.desktop.toggle.ConsoleToggleConstants;
+import com.nepxion.discovery.console.desktop.toggle.ConsoleToggleConstant;
 import com.nepxion.discovery.console.desktop.toggle.ConsoleToggleListener;
 import com.nepxion.swing.element.ElementNode;
 import com.nepxion.swing.list.toggle.JToggleList;
@@ -69,7 +69,7 @@ public class ConsoleHierarchy extends JPanel {
 
     private JShrinkOutlook createServiceControlShrinkOutlook(JShrinkOutlookBar shrinkOutlookBar) {
         List<ElementNode> elementNodes = new ArrayList<ElementNode>();
-        elementNodes.add(new ElementNode(ConsoleToggleConstants.SERVICE_TOPOLOGY, ConsoleLocaleFactory.getString(ConsoleToggleConstants.SERVICE_TOPOLOGY), ConsoleIconFactory.getSwingIcon("component/ui_16.png"), ConsoleLocaleFactory.getString(ConsoleToggleConstants.SERVICE_TOPOLOGY)));
+        elementNodes.add(new ElementNode(ConsoleToggleConstant.SERVICE_TOPOLOGY, ConsoleLocaleFactory.getString(ConsoleToggleConstant.SERVICE_TOPOLOGY), ConsoleIconFactory.getSwingIcon("component/ui_16.png"), ConsoleLocaleFactory.getString(ConsoleToggleConstant.SERVICE_TOPOLOGY)));
 
         JToggleList list = createList(elementNodes);
         list.setSelectedIndex(0);
