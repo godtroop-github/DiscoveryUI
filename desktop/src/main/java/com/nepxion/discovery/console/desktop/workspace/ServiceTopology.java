@@ -49,9 +49,8 @@ import com.nepxion.cots.twaver.graph.TGraphBackground;
 import com.nepxion.cots.twaver.graph.TGraphManager;
 import com.nepxion.discovery.common.entity.InstanceEntityWrapper;
 import com.nepxion.discovery.common.entity.ResultEntity;
+import com.nepxion.discovery.console.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.constant.ConsoleConstant;
-import com.nepxion.discovery.console.desktop.controller.ServiceController;
-import com.nepxion.discovery.console.desktop.entity.Instance;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.topology.AbstractTopology;
@@ -59,7 +58,8 @@ import com.nepxion.discovery.console.desktop.topology.NodeImageType;
 import com.nepxion.discovery.console.desktop.topology.NodeLocation;
 import com.nepxion.discovery.console.desktop.topology.NodeSizeType;
 import com.nepxion.discovery.console.desktop.topology.NodeUI;
-import com.nepxion.discovery.console.desktop.ui.UIFactory;
+import com.nepxion.discovery.console.desktop.ui.ConsoleUIFactory;
+import com.nepxion.discovery.console.entity.Instance;
 import com.nepxion.swing.action.JSecurityAction;
 import com.nepxion.swing.button.ButtonManager;
 import com.nepxion.swing.button.JClassicButton;
@@ -1005,7 +1005,7 @@ public class ServiceTopology extends AbstractTopology {
             layoutPanel.add(toolBar);
 
             JPanel panel = new JPanel();
-            panel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_version_operation")));
+            panel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_version_operation")));
             panel.setLayout(new BorderLayout());
             panel.add(versionTabbedPane, BorderLayout.CENTER);
             panel.add(layoutPanel, BorderLayout.SOUTH);
@@ -1051,7 +1051,7 @@ public class ServiceTopology extends AbstractTopology {
             layoutPanel.add(toolBar);
 
             JPanel panel = new JPanel();
-            panel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_rule_operation")));
+            panel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_rule_operation")));
             panel.setLayout(new BorderLayout());
             panel.add(ruleTabbedPane, BorderLayout.CENTER);
             panel.add(layoutPanel, BorderLayout.SOUTH);
@@ -1421,7 +1421,7 @@ public class ServiceTopology extends AbstractTopology {
 
             JPanel groupPanel = new JPanel();
             groupPanel.setLayout(tableLayout);
-            groupPanel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("group_layout")));
+            groupPanel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("group_layout")));
             groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_x")), "0, 0");
             groupPanel.add(groupStartXTextField, "1, 0");
             groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_y")), "2, 0");
@@ -1433,7 +1433,7 @@ public class ServiceTopology extends AbstractTopology {
 
             JPanel nodePanel = new JPanel();
             nodePanel.setLayout(tableLayout);
-            nodePanel.setBorder(UIFactory.createTitledBorder(ConsoleLocaleFactory.getString("node_layout")));
+            nodePanel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("node_layout")));
             nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_x")), "0, 0");
             nodePanel.add(nodeStartXTextField, "1, 0");
             nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_y")), "2, 0");
