@@ -50,7 +50,6 @@ import com.nepxion.cots.twaver.graph.TGraphManager;
 import com.nepxion.discovery.common.entity.InstanceEntityWrapper;
 import com.nepxion.discovery.common.entity.ResultEntity;
 import com.nepxion.discovery.console.controller.ServiceController;
-import com.nepxion.discovery.console.desktop.constant.ConsoleConstant;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.topology.AbstractTopology;
@@ -91,6 +90,9 @@ import com.nepxion.swing.textfield.number.JNumberTextField;
 
 public class ServiceTopology extends AbstractTopology {
     private static final long serialVersionUID = 1L;
+    
+    private static final String FILTER = "filter";
+    private static final String PLUGIN = "plugin";
 
     private NodeLocation groupLocation = new NodeLocation(120, 250, 280, 0);
     private NodeLocation nodeLocation = new NodeLocation(0, 0, 120, 150);
@@ -221,19 +223,19 @@ public class ServiceTopology extends AbstractTopology {
     }
 
     private String getFilter(TElement element) {
-        return element.getClientProperty(ConsoleConstant.FILTER).toString();
+        return element.getClientProperty(FILTER).toString();
     }
 
     private void setFilter(TElement element, String filter) {
-        element.putClientProperty(ConsoleConstant.FILTER, filter);
+        element.putClientProperty(FILTER, filter);
     }
 
     private String getPlugin(TElement element) {
-        return element.getClientProperty(ConsoleConstant.PLUGIN).toString();
+        return element.getClientProperty(PLUGIN).toString();
     }
 
     private void setPlugin(TElement element, String plugin) {
-        element.putClientProperty(ConsoleConstant.PLUGIN, plugin);
+        element.putClientProperty(PLUGIN, plugin);
     }
 
     private boolean isPlugin(TElement element) {
