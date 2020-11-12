@@ -48,6 +48,7 @@ import com.nepxion.cots.twaver.graph.TGraphBackground;
 import com.nepxion.cots.twaver.graph.TGraphManager;
 import com.nepxion.discovery.common.entity.InstanceEntityWrapper;
 import com.nepxion.discovery.common.entity.ResultEntity;
+import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
@@ -89,16 +90,16 @@ import com.nepxion.swing.textfield.number.JNumberTextField;
 
 public class ServiceTopology extends AbstractTopology {
     private static final long serialVersionUID = 1L;
-    
+
     private static final String FILTER = "filter";
     private static final String PLUGIN = "plugin";
 
     private NodeLocation groupLocation = new NodeLocation(120, 250, 280, 0);
     private NodeLocation nodeLocation = new NodeLocation(0, 0, 120, 150);
-    private NodeUI groupUI = new NodeUI(NodeImageType.SERVICE_GROUP, NodeSizeType.LARGE, true);
-    private NodeUI notGroupEntity = new NodeUI(NodeImageType.GATEWAY_GROUP, NodeSizeType.LARGE, true);
-    private NodeUI nodeUI = new NodeUI(NodeImageType.SERVICE, NodeSizeType.MIDDLE, false);
-    private NodeUI notNodeUI = new NodeUI(NodeImageType.GATEWAY, NodeSizeType.MIDDLE, false);
+    private NodeUI serviceGroupUI = new NodeUI(NodeImageType.SERVICE_GROUP, NodeSizeType.LARGE, true);
+    private NodeUI gatewayGroupUI = new NodeUI(NodeImageType.GATEWAY_GROUP, NodeSizeType.LARGE, true);
+    private NodeUI serviceNodeUI = new NodeUI(NodeImageType.SERVICE, NodeSizeType.MIDDLE, false);
+    private NodeUI gatewayNodeUI = new NodeUI(NodeImageType.GATEWAY, NodeSizeType.MIDDLE, false);
     private Map<String, Point> groupLocationMap = new HashMap<String, Point>();
 
     private TGraphBackground background;
@@ -257,7 +258,7 @@ public class ServiceTopology extends AbstractTopology {
         int count = groupLocationMap.size();
         String groupName = getGroupName(serviceId, instances.size(), filter);
 
-        TGroup group = createGroup(groupName, StringUtils.isNotEmpty(plugin) ? groupUI : notGroupEntity, groupLocation, count);
+        TGroup group = createGroup(groupName, StringUtils.isNotEmpty(plugin) ? serviceGroupUI : gatewayGroupUI, groupLocation, count);
         group.setGroupType(TGroupType.ELLIPSE_GROUP_TYPE.getType());
         group.setUserObject(serviceId);
         setFilter(group, filter);
@@ -273,7 +274,7 @@ public class ServiceTopology extends AbstractTopology {
             String plugin = InstanceEntityWrapper.getPlugin(instance);
             String nodeName = getNodeName(instance);
 
-            TNode node = createNode(nodeName, StringUtils.isNotEmpty(plugin) ? nodeUI : notNodeUI, nodeLocation, i);
+            TNode node = createNode(nodeName, StringUtils.equals(instance.getServiceType(), ServiceType.SERVICE.toString()) ? serviceNodeUI : gatewayNodeUI, nodeLocation, i);
             node.setUserObject(instance);
             setFilter(node, filter);
             setPlugin(node, plugin);
@@ -376,9 +377,6 @@ public class ServiceTopology extends AbstractTopology {
 
     private String getNodeName(Instance instance) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (StringUtils.isNotEmpty(instance.getServiceType())) {
-            stringBuilder.append(ConsoleLocaleFactory.getString("type_" + instance.getServiceType())).append(" - ");
-        }
         stringBuilder.append(instance.getHost()).append(":").append(instance.getPort());
         if (StringUtils.isNotEmpty(instance.getVersion())) {
             stringBuilder.append("\nv").append(instance.getVersion());
