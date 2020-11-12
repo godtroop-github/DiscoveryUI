@@ -242,7 +242,7 @@ public class RouterTopology extends BasicTopology {
     private TNode addNode(RouterEntity routerEntity, int index) {
         String nodeName = getNodeName(routerEntity);
 
-        TNode node = createNode(nodeName, StringUtils.equals(instance.getServiceType(), ServiceType.SERVICE.toString()) ? serviceNodeUI : gatewayNodeUI, nodeLocation, index);
+        TNode node = createNode(nodeName, StringUtils.equals(routerEntity.getServiceType(), ServiceType.SERVICE.toString()) ? serviceNodeUI : gatewayNodeUI, nodeLocation, index);
         node.setUserObject(routerEntity);
 
         dataBox.addElement(node);
