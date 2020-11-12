@@ -29,7 +29,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -382,20 +381,19 @@ public class ServiceTopology extends AbstractTopology {
         }
         stringBuilder.append(instance.getHost()).append(":").append(instance.getPort());
         if (StringUtils.isNotEmpty(instance.getVersion())) {
-            stringBuilder.append("\n[V").append(instance.getVersion());
+            stringBuilder.append("\nv").append(instance.getVersion());
             if (StringUtils.isNotEmpty(instance.getDynamicVersion())) {
-                stringBuilder.append(" -> V").append(instance.getDynamicVersion());
+                stringBuilder.append(" -> v").append(instance.getDynamicVersion());
             }
-            stringBuilder.append("]");
         }
         if (StringUtils.isNotEmpty(instance.getRegion())) {
-            stringBuilder.append("\n[Reion=").append(instance.getRegion()).append("]");
+            stringBuilder.append("\nreion=").append(instance.getRegion());
         }
         if (StringUtils.isNotEmpty(instance.getEnvironment())) {
-            stringBuilder.append("\n[Env=").append(instance.getEnvironment()).append("]");
+            stringBuilder.append("\nenv=").append(instance.getEnvironment());
         }
         if (StringUtils.isNotEmpty(instance.getZone())) {
-            stringBuilder.append("\n[Zone=").append(instance.getZone()).append("]");
+            stringBuilder.append("\nzone=").append(instance.getZone());
         }
 
         return ButtonManager.getHtmlText(stringBuilder.toString());
