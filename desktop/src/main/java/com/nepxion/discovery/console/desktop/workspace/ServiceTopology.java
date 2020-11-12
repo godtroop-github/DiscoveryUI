@@ -185,7 +185,6 @@ public class ServiceTopology extends AbstractTopology {
 
         JToolBar toolBar = getGraph().getToolbar();
         toolBar.addSeparator();
-        toolBar.add(Box.createHorizontalStrut(5));
         toolBar.add(new JClassicButton(createShowTopologyAction()));
         toolBar.addSeparator();
         toolBar.add(new JClassicButton(createExecuteGrayReleaseAction()));
