@@ -39,7 +39,7 @@ import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
-import com.nepxion.discovery.console.desktop.topology.AbstractTopology;
+import com.nepxion.discovery.console.desktop.topology.BasicTopology;
 import com.nepxion.discovery.console.desktop.topology.NodeImageType;
 import com.nepxion.discovery.console.desktop.topology.NodeLocation;
 import com.nepxion.discovery.console.desktop.topology.NodeSizeType;
@@ -61,7 +61,7 @@ import com.nepxion.swing.tabbedpane.JBasicTabbedPane;
 import com.nepxion.swing.textarea.JBasicTextArea;
 import com.nepxion.swing.textfield.JBasicTextField;
 
-public class RouterTopology extends AbstractTopology {
+public class RouterTopology extends BasicTopology {
     private static final long serialVersionUID = 1L;
 
     private NodeLocation nodeLocation = new NodeLocation(440, 50, 200, 0);

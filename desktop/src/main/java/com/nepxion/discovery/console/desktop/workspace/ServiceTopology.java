@@ -52,7 +52,7 @@ import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ServiceController;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
-import com.nepxion.discovery.console.desktop.topology.AbstractTopology;
+import com.nepxion.discovery.console.desktop.topology.BasicTopology;
 import com.nepxion.discovery.console.desktop.topology.NodeImageType;
 import com.nepxion.discovery.console.desktop.topology.NodeLocation;
 import com.nepxion.discovery.console.desktop.topology.NodeSizeType;
@@ -88,7 +88,7 @@ import com.nepxion.swing.textarea.JBasicTextArea;
 import com.nepxion.swing.textfield.JBasicTextField;
 import com.nepxion.swing.textfield.number.JNumberTextField;
 
-public class ServiceTopology extends AbstractTopology {
+public class ServiceTopology extends BasicTopology {
     private static final long serialVersionUID = 1L;
 
     private static final String FILTER = "filter";
