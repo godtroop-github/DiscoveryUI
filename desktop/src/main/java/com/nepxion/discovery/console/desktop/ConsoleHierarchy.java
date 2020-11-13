@@ -17,8 +17,10 @@ import com.nepxion.discovery.console.desktop.common.component.AbstractConsoleHie
 import com.nepxion.discovery.console.desktop.common.context.ConsoleUIContext;
 import com.nepxion.discovery.console.desktop.common.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.common.locale.ConsoleLocaleFactory;
-import com.nepxion.discovery.console.desktop.workspace.toggle.ConsoleToggleConstant;
+import com.nepxion.discovery.console.desktop.workspace.toggle.ToggleConstant;
+import com.nepxion.discovery.console.desktop.workspace.toggle.ToggleListener;
 import com.nepxion.swing.element.ElementNode;
+import com.nepxion.swing.list.toggle.AbstractToggleAdapter;
 import com.nepxion.swing.list.toggle.JToggleList;
 import com.nepxion.swing.shrinkbar.JShrinkOutlook;
 
@@ -32,15 +34,20 @@ public class ConsoleHierarchy extends AbstractConsoleHierarchy {
 
     private JShrinkOutlook createServiceControlShrinkOutlook() {
         List<ElementNode> elementNodes = new ArrayList<ElementNode>();
-        elementNodes.add(new ElementNode(ConsoleToggleConstant.SERVICE_TOPOLOGY, ConsoleLocaleFactory.getString(ConsoleToggleConstant.SERVICE_TOPOLOGY), ConsoleIconFactory.getSwingIcon("component/ui_16.png"), ConsoleLocaleFactory.getString(ConsoleToggleConstant.SERVICE_TOPOLOGY)));
+        elementNodes.add(new ElementNode(ToggleConstant.SERVICE_TOPOLOGY, ConsoleLocaleFactory.getString(ToggleConstant.SERVICE_TOPOLOGY), ConsoleIconFactory.getSwingIcon("component/ui_16.png"), ConsoleLocaleFactory.getString(ToggleConstant.SERVICE_TOPOLOGY)));
 
-        JToggleList list = createList(elementNodes);
-        list.setSelectedIndex(0);
+        JToggleList toggleList = createtoggleList(elementNodes);
+        toggleList.setSelectedIndex(0);
 
         JShrinkOutlook shrinkOutlook = shrinkOutlookBar.addShrinkOutlook(ConsoleLocaleFactory.getString("service_control"), ConsoleIconFactory.getSwingIcon("stereo/favorite_16.png"), ConsoleIconFactory.getSwingIcon("stereo/favorite_add_16.png"), ConsoleLocaleFactory.getString("service_control"), new Font(ConsoleUIContext.getFontName(), Font.BOLD, ConsoleUIContext.getMiddleFontSize()));
-        shrinkOutlook.setContentPane(list);
+        shrinkOutlook.setContentPane(toggleList);
         shrinkOutlook.addPropertyChangeListener(new OutlookSelectionListener());
 
         return shrinkOutlook;
+    }
+
+    @Override
+    public AbstractToggleAdapter createToggleListener(JToggleList toggleList) {
+        return new ToggleListener(toggleList);
     }
 }
