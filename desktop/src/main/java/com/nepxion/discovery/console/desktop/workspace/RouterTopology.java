@@ -36,7 +36,7 @@ import com.nepxion.cots.twaver.element.TNode;
 import com.nepxion.cots.twaver.graph.TGraphBackground;
 import com.nepxion.discovery.common.entity.RouterEntity;
 import com.nepxion.discovery.common.entity.ServiceType;
-import com.nepxion.discovery.console.controller.ServiceController;
+import com.nepxion.discovery.console.controller.ConsoleController;
 import com.nepxion.discovery.console.desktop.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.topology.BasicTopology;
@@ -350,7 +350,7 @@ public class RouterTopology extends BasicTopology {
 
                 RouterEntity routerEntity = null;
                 try {
-                    routerEntity = ServiceController.routes(instance, routerPath);
+                    routerEntity = ConsoleController.routes(instance, routerPath);
                 } catch (Exception ex) {
                     JExceptionDialog.traceException(HandleManager.getFrame(RouterTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
@@ -395,10 +395,10 @@ public class RouterTopology extends BasicTopology {
                 List<String> rules = null;
                 if (userObject instanceof Instance) {
                     Instance instance = (Instance) userObject;
-                    rules = ServiceController.getRules(instance);
+                    rules = ConsoleController.getRules(instance);
                 } else if (userObject instanceof RouterEntity) {
                     RouterEntity routerEntity = (RouterEntity) userObject;
-                    rules = ServiceController.getRules(routerEntity);
+                    rules = ConsoleController.getRules(routerEntity);
                 }
                 String dynamicPartialRule = rules.get(2);
                 String dynamicGlobalRule = rules.get(1);
