@@ -1,4 +1,4 @@
-package com.nepxion.discovery.console.desktop.topology;
+package com.nepxion.discovery.console.desktop.workspace.toggle;
 
 /**
  * <p>Title: Nepxion Discovery</p>
@@ -9,11 +9,6 @@ package com.nepxion.discovery.console.desktop.topology;
  * @version 1.0
  */
 
-public enum NodeImageType {
-    SERVICE_GROUP,
-    REFERENCE_GROUP,
-    GATEWAY_GROUP,
-    SERVICE,
-    REFERENCE,
-    GATEWAY
+public class ConsoleToggleConstant {
+    public static final String SERVICE_TOPOLOGY = "service_topology";
 }

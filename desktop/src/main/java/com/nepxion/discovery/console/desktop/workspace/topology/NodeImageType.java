@@ -1,4 +1,4 @@
-package com.nepxion.discovery.console.desktop.topology;
+package com.nepxion.discovery.console.desktop.workspace.topology;
 
 /**
  * <p>Title: Nepxion Discovery</p>
@@ -9,8 +9,11 @@ package com.nepxion.discovery.console.desktop.topology;
  * @version 1.0
  */
 
-public enum NodeSizeType {
-    LARGE,
-    MIDDLE,
-    SMALL
+public enum NodeImageType {
+    SERVICE_GROUP,
+    REFERENCE_GROUP,
+    GATEWAY_GROUP,
+    SERVICE,
+    REFERENCE,
+    GATEWAY
 }

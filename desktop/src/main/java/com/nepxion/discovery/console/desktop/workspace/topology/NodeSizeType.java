@@ -1,4 +1,4 @@
-package com.nepxion.discovery.console.desktop.toggle;
+package com.nepxion.discovery.console.desktop.workspace.topology;
 
 /**
  * <p>Title: Nepxion Discovery</p>
@@ -9,6 +9,8 @@ package com.nepxion.discovery.console.desktop.toggle;
  * @version 1.0
  */
 
-public class ConsoleToggleConstant {
-    public static final String SERVICE_TOPOLOGY = "service_topology";
+public enum NodeSizeType {
+    LARGE,
+    MIDDLE,
+    SMALL
 }
