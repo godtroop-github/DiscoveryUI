@@ -62,7 +62,7 @@ public abstract class AbstractConsoleHierarchy extends JReflectionHierarchy {
         shrinkOutlookBar.setToolTipText(ConsoleLocaleFactory.getString("navigator_bar"));
         shrinkOutlookBar.setIcon(ConsoleIconFactory.getSwingIcon("hierarchy.png"));
         shrinkOutlookBar.setTitleFont(new Font(ConsoleUIContext.getFontName(), Font.BOLD, ConsoleUIContext.getLargeFontSize()));
-        shrinkOutlookBar.setPreferredSize(new Dimension(210, shrinkOutlookBar.getPreferredSize().height));
+        shrinkOutlookBar.setPreferredSize(new Dimension(200, shrinkOutlookBar.getPreferredSize().height));
 
         initializeUI();
 
