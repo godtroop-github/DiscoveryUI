@@ -9,6 +9,6 @@ package com.nepxion.discovery.console.desktop.workspace.toggle;
  * @version 1.0
  */
 
-public class ConsoleToggleConstant {
+public class ToggleConstant {
     public static final String SERVICE_TOPOLOGY = "service_topology";
 }

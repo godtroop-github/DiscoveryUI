@@ -17,13 +17,13 @@ import javax.swing.JPanel;
 import com.nepxion.discovery.console.desktop.workspace.ServiceTopology;
 import com.nepxion.swing.element.IElementNode;
 
-public class ConsoleToggleSpace extends JPanel {
+public class ToggleSpace extends JPanel {
     private static final long serialVersionUID = 1L;
 
     private IElementNode listElementNode;
     private JPanel blankPane = new JPanel();
 
-    public ConsoleToggleSpace(IElementNode listElementNode) {
+    public ToggleSpace(IElementNode listElementNode) {
         this.listElementNode = listElementNode;
 
         setLayout(new BorderLayout());
@@ -34,7 +34,7 @@ public class ConsoleToggleSpace extends JPanel {
         JComponent contentPane = null;
 
         String name = listElementNode.getName();
-        if (name.equals(ConsoleToggleConstant.SERVICE_TOPOLOGY)) {
+        if (name.equals(ToggleConstant.SERVICE_TOPOLOGY)) {
             contentPane = new ServiceTopology();
         } else {
             contentPane = blankPane;
