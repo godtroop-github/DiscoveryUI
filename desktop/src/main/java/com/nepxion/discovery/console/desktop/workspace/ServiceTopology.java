@@ -52,7 +52,7 @@ import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ConsoleController;
 import com.nepxion.discovery.console.desktop.common.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.common.locale.ConsoleLocaleFactory;
-import com.nepxion.discovery.console.desktop.common.ui.ConsoleUIFactory;
+import com.nepxion.discovery.console.desktop.common.util.BorderUtil;
 import com.nepxion.discovery.console.desktop.workspace.topology.BasicTopology;
 import com.nepxion.discovery.console.desktop.workspace.topology.NodeImageType;
 import com.nepxion.discovery.console.desktop.workspace.topology.NodeLocation;
@@ -1002,7 +1002,7 @@ public class ServiceTopology extends BasicTopology {
             layoutPanel.add(toolBar);
 
             JPanel panel = new JPanel();
-            panel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_version_operation")));
+            panel.setBorder(BorderUtil.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_version_operation")));
             panel.setLayout(new BorderLayout());
             panel.add(versionTabbedPane, BorderLayout.CENTER);
             panel.add(layoutPanel, BorderLayout.SOUTH);
@@ -1048,7 +1048,7 @@ public class ServiceTopology extends BasicTopology {
             layoutPanel.add(toolBar);
 
             JPanel panel = new JPanel();
-            panel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_rule_operation")));
+            panel.setBorder(BorderUtil.createTitledBorder(ConsoleLocaleFactory.getString("title_gray_rule_operation")));
             panel.setLayout(new BorderLayout());
             panel.add(ruleTabbedPane, BorderLayout.CENTER);
             panel.add(layoutPanel, BorderLayout.SOUTH);
@@ -1418,7 +1418,7 @@ public class ServiceTopology extends BasicTopology {
 
             JPanel groupPanel = new JPanel();
             groupPanel.setLayout(tableLayout);
-            groupPanel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("group_layout")));
+            groupPanel.setBorder(BorderUtil.createTitledBorder(ConsoleLocaleFactory.getString("group_layout")));
             groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_x")), "0, 0");
             groupPanel.add(groupStartXTextField, "1, 0");
             groupPanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_y")), "2, 0");
@@ -1430,7 +1430,7 @@ public class ServiceTopology extends BasicTopology {
 
             JPanel nodePanel = new JPanel();
             nodePanel.setLayout(tableLayout);
-            nodePanel.setBorder(ConsoleUIFactory.createTitledBorder(ConsoleLocaleFactory.getString("node_layout")));
+            nodePanel.setBorder(BorderUtil.createTitledBorder(ConsoleLocaleFactory.getString("node_layout")));
             nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_x")), "0, 0");
             nodePanel.add(nodeStartXTextField, "1, 0");
             nodePanel.add(new JBasicLabel(ConsoleLocaleFactory.getString("start_y")), "2, 0");

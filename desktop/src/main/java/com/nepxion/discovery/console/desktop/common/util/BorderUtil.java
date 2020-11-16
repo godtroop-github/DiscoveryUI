@@ -1,4 +1,4 @@
-package com.nepxion.discovery.console.desktop.common.ui;
+package com.nepxion.discovery.console.desktop.common.util;
 
 /**
  * <p>Title: Nepxion Discovery</p>
@@ -19,7 +19,7 @@ import javax.swing.border.TitledBorder;
 import com.nepxion.discovery.console.desktop.common.context.ConsoleUIContext;
 import com.nepxion.swing.separator.JBasicSeparator;
 
-public class ConsoleUIFactory {
+public class BorderUtil {
     public static JBasicSeparator createSeparator() {
         JBasicSeparator separator = new JBasicSeparator(JBasicSeparator.HORIZONTAL, JBasicSeparator.LOWERED_STYLE, -1);
         separator.setBrightColor(new Color(197, 196, 198));
