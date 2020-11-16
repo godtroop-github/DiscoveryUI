@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nepxion.discovery.console.desktop.common.component.AbstractConsoleHierarchy;
-import com.nepxion.discovery.console.desktop.common.context.ConsoleFontContext;
+import com.nepxion.discovery.console.desktop.common.context.ConsoleUIContext;
 import com.nepxion.discovery.console.desktop.common.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.common.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.workspace.toggle.ToggleConstant;
@@ -39,7 +39,7 @@ public class ConsoleHierarchy extends AbstractConsoleHierarchy {
         JToggleList toggleList = createToggleList(elementNodes);
         toggleList.setSelectedIndex(0);
 
-        JShrinkOutlook shrinkOutlook = shrinkOutlookBar.addShrinkOutlook(ConsoleLocaleFactory.getString("service_control"), ConsoleIconFactory.getSwingIcon("stereo/favorite_16.png"), ConsoleIconFactory.getSwingIcon("stereo/favorite_add_16.png"), ConsoleLocaleFactory.getString("service_control"), new Font(ConsoleFontContext.getFontName(), Font.BOLD, ConsoleFontContext.getMiddleFontSize()));
+        JShrinkOutlook shrinkOutlook = shrinkOutlookBar.addShrinkOutlook(ConsoleLocaleFactory.getString("service_control"), ConsoleIconFactory.getSwingIcon("stereo/favorite_16.png"), ConsoleIconFactory.getSwingIcon("stereo/favorite_add_16.png"), ConsoleLocaleFactory.getString("service_control"), new Font(ConsoleUIContext.getFontName(), Font.BOLD, ConsoleUIContext.getMiddleFontSize()));
         shrinkOutlook.setContentPane(toggleList);
         shrinkOutlook.addPropertyChangeListener(new OutlookSelectionListener());
 
