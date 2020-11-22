@@ -81,7 +81,7 @@ public abstract class AbstractConsoleHierarchy extends JReflectionHierarchy {
         JToggleList toggleList = new JToggleList(CollectionUtil.parseVector(elementNodes));
         toggleList.setSelectionMode(JToggleList.SINGLE_SELECTION);
         toggleList.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
-        toggleList.setCellRenderer(new ShrinkListCellRenderer(toggleList, BorderFactory.createEmptyBorder(0, 10, 0, 0), 22));
+        toggleList.setCellRenderer(new ShrinkListCellRenderer(toggleList, BorderFactory.createEmptyBorder(0, 10, 0, 0), 32));
         toggleList.setToggleContentPanel(shrinkContentBar);
         toggleList.setToggleAdapter(createToggleListener(toggleList));
 
