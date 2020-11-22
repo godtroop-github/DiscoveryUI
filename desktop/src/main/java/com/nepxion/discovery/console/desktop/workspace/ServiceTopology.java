@@ -50,6 +50,7 @@ import com.nepxion.discovery.common.entity.InstanceEntityWrapper;
 import com.nepxion.discovery.common.entity.ResultEntity;
 import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ConsoleController;
+import com.nepxion.discovery.console.desktop.common.component.ConsoleExceptionDialog;
 import com.nepxion.discovery.console.desktop.common.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.common.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.common.util.BorderUtil;
@@ -63,7 +64,6 @@ import com.nepxion.swing.action.JSecurityAction;
 import com.nepxion.swing.button.ButtonManager;
 import com.nepxion.swing.button.JClassicButton;
 import com.nepxion.swing.button.JClassicMenuButton;
-import com.nepxion.swing.dialog.JExceptionDialog;
 import com.nepxion.swing.dialog.JOptionDialog;
 import com.nepxion.swing.element.ElementNode;
 import com.nepxion.swing.framework.dockable.JDockable;
@@ -453,7 +453,7 @@ public class ServiceTopology extends BasicTopology {
         try {
             updateGrayState(node);
         } catch (Exception e) {
-            JExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocaleFactory.getString("query_data_failure"), e);
+            ConsoleExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocaleFactory.getString("query_data_failure"), e);
 
             group.removeChild(node);
             dataBox.removeElement(node);
@@ -478,7 +478,7 @@ public class ServiceTopology extends BasicTopology {
             try {
                 updateGrayState(node);
             } catch (Exception e) {
-                JExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocaleFactory.getString("query_data_failure"), e);
+                ConsoleExceptionDialog.traceException(HandleManager.getFrame(this), ConsoleLocaleFactory.getString("query_data_failure"), e);
 
                 iterator.remove();
                 dataBox.removeElement(node);
@@ -551,7 +551,7 @@ public class ServiceTopology extends BasicTopology {
                 try {
                     groups = ConsoleController.getGroups();
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_group_failure"), ex);
+                    ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_group_failure"), ex);
 
                     return;
                 }
@@ -577,7 +577,7 @@ public class ServiceTopology extends BasicTopology {
                 try {
                     instanceMap = ConsoleController.getInstanceMap(filters);
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_instances_failure"), ex);
+                    ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_instances_failure"), ex);
 
                     return;
                 }
@@ -772,7 +772,7 @@ public class ServiceTopology extends BasicTopology {
                 try {
                     groups = ConsoleController.getGroups();
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_group_failure"), ex);
+                    ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("get_service_group_failure"), ex);
 
                     return;
                 }
@@ -890,7 +890,7 @@ public class ServiceTopology extends BasicTopology {
                     try {
                         result = ConsoleController.remoteConfigUpdate(filter, filter, rule);
                     } catch (Exception ex) {
-                        JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                        ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                         return;
                     }
@@ -920,7 +920,7 @@ public class ServiceTopology extends BasicTopology {
                     try {
                         result = ConsoleController.remoteConfigClear(filter, filter);
                     } catch (Exception ex) {
-                        JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                        ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                         return;
                     }
@@ -1171,7 +1171,7 @@ public class ServiceTopology extends BasicTopology {
                         try {
                             results = ConsoleController.versionUpdate(serviceId, dynamicVersion, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                            ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(group);
 
@@ -1188,7 +1188,7 @@ public class ServiceTopology extends BasicTopology {
                         try {
                             result = ConsoleController.versionUpdate(instance, dynamicVersion, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                            ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1216,7 +1216,7 @@ public class ServiceTopology extends BasicTopology {
                         try {
                             results = ConsoleController.versionClear(serviceId, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                            ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(group);
 
@@ -1233,7 +1233,7 @@ public class ServiceTopology extends BasicTopology {
                         try {
                             result = ConsoleController.versionClear(instance, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                            ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1271,7 +1271,7 @@ public class ServiceTopology extends BasicTopology {
                             try {
                                 result = ConsoleController.remoteConfigUpdate(filter, serviceId, dynamicRule);
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                                ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1284,7 +1284,7 @@ public class ServiceTopology extends BasicTopology {
                             try {
                                 results = ConsoleController.configUpdate(serviceId, dynamicRule, pushAsyncModeRadioButtonMenuItem.isSelected());
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                                ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1302,7 +1302,7 @@ public class ServiceTopology extends BasicTopology {
                         try {
                             result = ConsoleController.configUpdate(instance, dynamicRule, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                            ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 
@@ -1332,7 +1332,7 @@ public class ServiceTopology extends BasicTopology {
                             try {
                                 result = ConsoleController.remoteConfigClear(filter, serviceId);
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                                ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1345,7 +1345,7 @@ public class ServiceTopology extends BasicTopology {
                             try {
                                 results = ConsoleController.configClear(serviceId, pushAsyncModeRadioButtonMenuItem.isSelected());
                             } catch (Exception ex) {
-                                JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                                ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                                 refreshGrayState(group);
 
@@ -1363,7 +1363,7 @@ public class ServiceTopology extends BasicTopology {
                         try {
                             result = ConsoleController.configClear(instance, pushAsyncModeRadioButtonMenuItem.isSelected());
                         } catch (Exception ex) {
-                            JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                            ConsoleExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                             refreshGrayState(node);
 

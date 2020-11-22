@@ -37,6 +37,7 @@ import com.nepxion.cots.twaver.graph.TGraphBackground;
 import com.nepxion.discovery.common.entity.RouterEntity;
 import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ConsoleController;
+import com.nepxion.discovery.console.desktop.common.component.ConsoleExceptionDialog;
 import com.nepxion.discovery.console.desktop.common.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.common.locale.ConsoleLocaleFactory;
 import com.nepxion.discovery.console.desktop.workspace.topology.BasicTopology;
@@ -49,7 +50,6 @@ import com.nepxion.swing.action.JSecurityAction;
 import com.nepxion.swing.button.ButtonManager;
 import com.nepxion.swing.button.JClassicButton;
 import com.nepxion.swing.combobox.JBasicComboBox;
-import com.nepxion.swing.dialog.JExceptionDialog;
 import com.nepxion.swing.handle.HandleManager;
 import com.nepxion.swing.listener.DisplayAbilityListener;
 import com.nepxion.swing.locale.SwingLocale;
@@ -352,7 +352,7 @@ public class RouterTopology extends BasicTopology {
                 try {
                     routerEntity = ConsoleController.routes(instance, routerPath);
                 } catch (Exception ex) {
-                    JExceptionDialog.traceException(HandleManager.getFrame(RouterTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                    ConsoleExceptionDialog.traceException(HandleManager.getFrame(RouterTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                     return;
                 }
