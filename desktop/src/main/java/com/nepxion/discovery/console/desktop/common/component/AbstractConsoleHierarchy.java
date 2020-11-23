@@ -34,7 +34,7 @@ import com.nepxion.swing.shrinkbar.ShrinkOutlookSelectionListener;
 import com.nepxion.swing.style.texture.shrink.IHeaderTextureStyle;
 import com.nepxion.swing.style.texture.shrink.IOutlookTextureStyle;
 import com.nepxion.swing.style.texture.shrink.JBlackHeaderTextureStyle;
-import com.nepxion.swing.style.texture.shrink.JGreenOutlookTextureStyle;
+import com.nepxion.swing.style.texture.shrink.JBlackOutlookTextureStyle;
 import com.nepxion.util.data.CollectionUtil;
 
 public abstract class AbstractConsoleHierarchy extends JReflectionHierarchy {
@@ -47,7 +47,7 @@ public abstract class AbstractConsoleHierarchy extends JReflectionHierarchy {
         super(20, 20);
 
         IHeaderTextureStyle headerTextureStyle = new JBlackHeaderTextureStyle();
-        IOutlookTextureStyle outlookTextureStyle = new JGreenOutlookTextureStyle();
+        IOutlookTextureStyle outlookTextureStyle = new JBlackOutlookTextureStyle();
 
         shrinkContentBar = new JShrinkBar(JShrinkBar.PLACEMENT_EAST, JShrinkBar.CONTENT_PANE_TYPE_LABEL, headerTextureStyle);
         shrinkContentBar.setShrinkable(false);
