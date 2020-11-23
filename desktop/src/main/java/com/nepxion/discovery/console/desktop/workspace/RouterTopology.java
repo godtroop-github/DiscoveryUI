@@ -37,9 +37,9 @@ import com.nepxion.cots.twaver.graph.TGraphBackground;
 import com.nepxion.discovery.common.entity.RouterEntity;
 import com.nepxion.discovery.common.entity.ServiceType;
 import com.nepxion.discovery.console.controller.ConsoleController;
-import com.nepxion.discovery.console.desktop.common.component.ConsoleExceptionDialog;
 import com.nepxion.discovery.console.desktop.common.icon.ConsoleIconFactory;
 import com.nepxion.discovery.console.desktop.common.locale.ConsoleLocaleFactory;
+import com.nepxion.discovery.console.desktop.common.swing.dialog.JExceptionDialog;
 import com.nepxion.discovery.console.desktop.workspace.topology.BasicTopology;
 import com.nepxion.discovery.console.desktop.workspace.topology.NodeImageType;
 import com.nepxion.discovery.console.desktop.workspace.topology.NodeLocation;
@@ -352,7 +352,7 @@ public class RouterTopology extends BasicTopology {
                 try {
                     routerEntity = ConsoleController.routes(instance, routerPath);
                 } catch (Exception ex) {
-                    ConsoleExceptionDialog.traceException(HandleManager.getFrame(RouterTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
+                    JExceptionDialog.traceException(HandleManager.getFrame(RouterTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
                     return;
                 }
