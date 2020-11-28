@@ -86,25 +86,25 @@ export default defineConfig({
                   name: 'serviceBlueGreen', // 全链路服务蓝绿
                   icon: 'smile',
                   path: '/servicesDeployManager/serviceBlueGreen',
-                  component: './dashboard/analysis',
+                  component: './servicesDeployManager/serviceBlueGreen',
                 },
                 {
                   name: 'serviceGrey', // 全链路服务灰度
                   icon: 'smile',
                   path: '/servicesDeployManager/serviceGrey',
-                  component: './dashboard/analysis',
+                  component: './servicesDeployManager/serviceGrey',
                 },
                 {
                   name: 'serviceFlowMonitor', // 全链路流量侦测
                   icon: 'smile',
                   path: '/servicesDeployManager/serviceFlowMonitor',
-                  component: './dashboard/analysis',
+                  component: './servicesDeployManager/serviceFlowMonitor',
                 },
                 {
                   name: 'serviceCaseExtraction', // 全链路实例摘除
                   icon: 'smile',
                   path: '/servicesDeployManager/serviceCaseExtraction',
-                  component: './dashboard/analysis',
+                  component: './servicesDeployManager/serviceCaseExtraction',
                 },
               ]
             },
