@@ -31,6 +31,7 @@ export default defineConfig({
       path: '/',
       component: '../layouts/BlankLayout',
       routes: [
+        /*
         {
           path: '/user',
           component: '../layouts/UserLayout',
@@ -61,7 +62,7 @@ export default defineConfig({
               component: '404',
             },
           ],
-        },
+        },*/
         {
           path: '/',
           component: '../layouts/BasicLayout',
@@ -72,6 +73,42 @@ export default defineConfig({
               path: '/',
               redirect: '/dashboard/analysis',
             },
+            {
+              path: '/servicesDeployManager', // 服务发布管理menu
+              name: 'servicesDeployManager',
+              icon: 'dashboard',
+              routes: [
+                {
+                  path: '/',
+                  redirect: '/servicesDeployManager/serviceBlueGreen',
+                },
+                {
+                  name: 'serviceBlueGreen', // 全链路服务蓝绿
+                  icon: 'smile',
+                  path: '/servicesDeployManager/serviceBlueGreen',
+                  component: './dashboard/analysis',
+                },
+                {
+                  name: 'serviceGrey', // 全链路服务灰度
+                  icon: 'smile',
+                  path: '/servicesDeployManager/serviceGrey',
+                  component: './dashboard/analysis',
+                },
+                {
+                  name: 'serviceFlowMonitor', // 全链路流量侦测
+                  icon: 'smile',
+                  path: '/servicesDeployManager/serviceFlowMonitor',
+                  component: './dashboard/analysis',
+                },
+                {
+                  name: 'serviceCaseExtraction', // 全链路实例摘除
+                  icon: 'smile',
+                  path: '/servicesDeployManager/serviceCaseExtraction',
+                  component: './dashboard/analysis',
+                },
+              ]
+            },
+            /*
             {
               path: '/dashboard',
               name: 'dashboard',
@@ -100,7 +137,7 @@ export default defineConfig({
                   component: './dashboard/workplace',
                 },
               ],
-            },
+            },*/
             {
               path: '/form',
               icon: 'form',
@@ -130,6 +167,7 @@ export default defineConfig({
                 },
               ],
             },
+            /*
             {
               path: '/list',
               icon: 'table',
@@ -317,7 +355,7 @@ export default defineConfig({
             },
             {
               component: '404',
-            },
+            },*/
           ],
         },
       ],

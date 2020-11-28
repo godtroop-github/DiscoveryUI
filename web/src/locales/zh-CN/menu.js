@@ -49,4 +49,9 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  'menu.servicesDeployManager': '服务发布管理',
+  'menu.servicesDeployManager.serviceBlueGreen': '全链路服务蓝绿',
+  'menu.servicesDeployManager.serviceGrey': '全链路服务灰度',
+  'menu.servicesDeployManager.serviceFlowMonitor': '全链路流量侦测',
+  'menu.servicesDeployManager.serviceCaseExtraction': '全链路实例摘除',
 };
