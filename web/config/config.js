@@ -71,7 +71,7 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/dashboard/analysis',
+              redirect: '/servicesDeployManager/serviceBlueGreen',
             },
             {
               path: '/servicesDeployManager', // 服务发布管理menu
