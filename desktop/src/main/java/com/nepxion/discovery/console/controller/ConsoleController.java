@@ -8,8 +8,6 @@ package com.nepxion.discovery.console.controller;
  * @author Haojun Ren
  * @version 1.0
  */
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -149,16 +147,14 @@ public class ConsoleController {
         });
     }
 
-    public static InspectorEntity inspectByHeader(String url, String headers, InspectorEntity inspectorEntity) {
+    public static InspectorEntity inspect(String url, Map<String, String> headerMap, Map<String, String> parameterMap, Map<String, String> cookieMap, InspectorEntity inspectorEntity) {
         HttpHeaders httpHeaders = new HttpHeaders();
 
-        if (StringUtils.isNotEmpty(headers)) {
-            String[] separateArray = StringUtils.splitByWholeSeparator(headers, DiscoveryConstant.SEPARATE);
-            for (String separateValue : separateArray) {
-                String[] equalsArray = StringUtils.splitByWholeSeparator(separateValue, DiscoveryConstant.EQUALS);
-                httpHeaders.add(equalsArray[0].trim(), equalsArray[1].trim());
-            }
-        }
+        RestUtil.processHeader(httpHeaders, headerMap);
+
+        url = RestUtil.processParameter(url, parameterMap);
+
+        RestUtil.processCookie(httpHeaders, cookieMap);
 
         HttpEntity<InspectorEntity> requestEntity = new HttpEntity<InspectorEntity>(inspectorEntity, httpHeaders);
 
@@ -167,24 +163,30 @@ public class ConsoleController {
         return resultInspectorEntity;
     }
 
-    public static InspectorEntity inspectByParameter(String url, String parameter, InspectorEntity inspectorEntity) {
-        parameter = StringUtils.isNotBlank(parameter) ? "?" + parameter : "";
-        parameter = parameter.replace(DiscoveryConstant.SEPARATE, "&");
+    public static InspectorEntity inspectByHeader(String url, Map<String, String> headerMap, InspectorEntity inspectorEntity) {
+        HttpHeaders httpHeaders = new HttpHeaders();
 
-        InspectorEntity resultInspectorEntity = restTemplate.postForEntity(url + parameter, inspectorEntity, InspectorEntity.class).getBody();
+        RestUtil.processHeader(httpHeaders, headerMap);
+
+        HttpEntity<InspectorEntity> requestEntity = new HttpEntity<InspectorEntity>(inspectorEntity, httpHeaders);
+
+        InspectorEntity resultInspectorEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, InspectorEntity.class).getBody();
 
         return resultInspectorEntity;
     }
 
-    public static InspectorEntity inspectByCookie(String url, String cookies, InspectorEntity inspectorEntity) {
+    public static InspectorEntity inspectByParameter(String url, Map<String, String> parameterMap, InspectorEntity inspectorEntity) {
+        url = RestUtil.processParameter(url, parameterMap);
+
+        InspectorEntity resultInspectorEntity = restTemplate.postForEntity(url, inspectorEntity, InspectorEntity.class).getBody();
+
+        return resultInspectorEntity;
+    }
+
+    public static InspectorEntity inspectByCookie(String url, Map<String, String> cookieMap, InspectorEntity inspectorEntity) {
         HttpHeaders httpHeaders = new HttpHeaders();
 
-        if (StringUtils.isNotEmpty(cookies)) {
-            String[] separateArray = StringUtils.splitByWholeSeparator(cookies, DiscoveryConstant.SEPARATE);
-
-            List<String> cookieList = Arrays.asList(separateArray);
-            httpHeaders.put("Cookie", cookieList);
-        }
+        RestUtil.processCookie(httpHeaders, cookieMap);
 
         HttpEntity<InspectorEntity> requestEntity = new HttpEntity<InspectorEntity>(inspectorEntity, httpHeaders);
 
