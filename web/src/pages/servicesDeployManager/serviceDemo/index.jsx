@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { data } from './data';
+import React, { useEffect } from 'react';
 import G6 from '@antv/g6';
+import { data } from './data';
+
 
 export default function() {
   const ref = React.useRef(null)
@@ -43,6 +43,6 @@ export default function() {
   }, [])
 
   return (
-    <div ref={ref}></div>
+    <div ref={ref} />
   );
 }
