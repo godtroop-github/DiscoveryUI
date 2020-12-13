@@ -106,6 +106,12 @@ export default defineConfig({
                   path: '/servicesDeployManager/serviceCaseExtraction',
                   component: './servicesDeployManager/serviceCaseExtraction',
                 },
+                {
+                  name: 'serviceDemo', // 全链路实例摘除
+                  icon: 'smile',
+                  path: '/servicesDeployManager/serviceDemo',
+                  component: './servicesDeployManager/serviceDemo',
+                },
               ]
             },
             /*
