@@ -3,9 +3,8 @@ import { reloadAuthorized } from './Authorized'; // use localStorage to store th
 export function getAuthority(str) {
   const authorityString =
     typeof str === 'undefined' && localStorage ? localStorage.getItem('antd-pro-authority') : str; // authorityString could be admin, "admin", ["admin"]
-
+  
   let authority;
-
   try {
     if (authorityString) {
       authority = JSON.parse(authorityString);
@@ -14,7 +13,14 @@ export function getAuthority(str) {
     authority = authorityString;
   }
 
+  if (!authority) {
+    return ['guest'];
+  }
   if (typeof authority === 'string') {
+    if (authority != 'admin') {
+      authority = 'guest'
+    }
+    
     return [authority];
   } // preview.pro.ant.design only do not use in your production.
   // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
