@@ -20,6 +20,7 @@
 ![](http://nepxion.gitee.io/docs/discovery-doc/Logo64.png) Discovery【探索】微服务企业级解决方案
 
 ① Discovery【探索】微服务企业级解决方案文档
+- [Discovery【探索】微服务企业级解决方案(WIKI版)](http://nepxion.com/discovery)
 - [Discovery【探索】微服务企业级解决方案(PPT版)](http://nepxion.gitee.io/docs/link-doc/discovery-ppt.html)
 - [Discovery【探索】微服务企业级解决方案(PDF版)](http://nepxion.gitee.io/docs/link-doc/discovery-pdf.html)
 - [Discovery【探索】微服务企业级解决方案(HTML版)](http://nepxion.gitee.io/docs/link-doc/discovery-html.html)
@@ -33,13 +34,14 @@
 - [指南Github原镜像](https://github.com/Nepxion/DiscoveryGuide)
 
 ④ Discovery【探索】微服务框架指南示例说明
-- 对于入门级玩家，参考[指南示例极简版](https://github.com/Nepxion/DiscoveryGuide/tree/simple)，分支为simple。涉及到指南篇里的灰度路由和发布的基本功能，![](http://nepxion.gitee.io/docs/icon-doc/information_message.png) 参考[新手快速入门](https://gitee.com/nepxion/DiscoveryGuide/blob/simple/GUIDE.md)
+- 对于入门级玩家，参考[指南示例极简版](https://github.com/Nepxion/DiscoveryGuide/tree/simple)，分支为simple。涉及到指南篇里的蓝绿灰度发布的基本功能，![](http://nepxion.gitee.io/docs/icon-doc/information_message.png) 参考[新手快速入门](https://gitee.com/nepxion/DiscoveryGuide/blob/simple/GUIDE.md)
 - 对于熟练级玩家，参考[指南示例精进版](https://github.com/Nepxion/DiscoveryGuide/tree/master)，分支为master。除上述《极简版》功能外，涉及到指南篇里的绝大多数高级功能
-- 对于骨灰级玩家，参考[指南示例高级版](https://github.com/Nepxion/DiscoveryGuide/tree/premium)，分支为premium。除上述《精进版》功能外，涉及到指南篇里的ActiveMQ、MongoDB、RabbitMQ、Redis、RocketMQ、MySQL等高级调用链和灰度调用链的整合
+- 对于骨灰级玩家，参考[指南示例高级版](https://github.com/Nepxion/DiscoveryGuide/tree/premium)，分支为premium。除上述《精进版》功能外，涉及到指南篇里的ActiveMQ、MongoDB、RabbitMQ、Redis、RocketMQ、MySQL等高级调用链和蓝绿灰度调用链的整合
 
 ![](http://nepxion.gitee.io/docs/polaris-doc/Logo64.png) Polaris【北极星】企业级云原生微服务框架
 
 ① Polaris【北极星】企业级云原生微服务框架文档
+- [Polaris【北极星】企业级云原生微服务框架(WIKI版)](http://nepxion.com/polaris)
 - [Polaris【北极星】企业级云原生微服务框架(PDF版)](http://nepxion.gitee.io/docs/link-doc/polaris-pdf.html)
 - [Polaris【北极星】企业级云原生微服务框架(HTML版)](http://nepxion.gitee.io/docs/link-doc/polaris-html.html)
 
@@ -82,9 +84,9 @@
 ![](http://nepxion.gitee.io/docs/polaris-doc/GlobalSub.jpg)
 
 ## 请联系我
-微信、公众号和文档
+微信、钉钉、公众号和文档
 
-![](http://nepxion.gitee.io/docs/zxing-doc/微信-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/公众号-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/文档-1.jpg)
+![](http://nepxion.gitee.io/docs/zxing-doc/微信-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/钉钉-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/公众号-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/文档-1.jpg)
 
 ## Star走势图
 [![Stargazers over time](https://starchart.cc/Nepxion/Discovery.svg)](https://starchart.cc/Nepxion/Discovery)
