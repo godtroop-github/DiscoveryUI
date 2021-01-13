@@ -26,45 +26,59 @@ const Model = {
     status: undefined,
   },
   effects: {
-    *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      }); // Login successfully
-
-      if (response.status === 'ok') {
-        message.success('登录成功！');
-        const urlParams = new URL(window.location.href);
-        const params = getPageQuery();
-        let { redirect } = params;
-
-        if (redirect) {
-          const redirectUrlParams = new URL(redirect);
-
-          if (redirectUrlParams.origin === urlParams.origin) {
-            redirect = redirect.substr(urlParams.origin.length);
-
-            if (redirect.match(/^\/.*#/)) {
-              redirect = redirect.substr(redirect.indexOf('#') + 1);
+    * login({ payload }, { call, put }) {
+      try {
+        const response = yield call(fakeAccountLogin, payload);
+        if (response) {
+          yield put({
+            type: 'changeLoginStatus',
+            payload: 'admin',
+          }); // Login successfully
+          message.success('登录成功！');
+          const urlParams = new URL(window.location.href);
+          const params = getPageQuery();
+          let { redirect } = params;
+  
+          if (redirect) {
+            const redirectUrlParams = new URL(redirect);
+  
+            if (redirectUrlParams.origin === urlParams.origin) {
+              redirect = redirect.substr(urlParams.origin.length);
+  
+              if (redirect.match(/^\/.*#/)) {
+                redirect = redirect.substr(redirect.indexOf('#') + 1);
+              }
+            } else {
+              window.location.href = redirect;
+              return;
             }
-          } else {
-            window.location.href = redirect;
-            return;
           }
+  
+          history.replace(redirect || '/');
+        } else {
+          message.error('密码错误');
+          yield put({
+            type: 'changeLoginStatus',
+            payload: 'guest',
+          }); // Login fail
         }
-
-        history.replace(redirect || '/');
+      } catch(e) {
+        message.error('密码错误');
+        yield put({
+          type: 'changeLoginStatus',
+          payload: 'guest',
+        }); // Login fail
       }
+      
     },
 
-    *getCaptcha({ payload }, { call }) {
+    * getCaptcha({ payload }, { call }) {
       yield call(getFakeCaptcha, payload);
     },
   },
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      setAuthority(payload);
       return { ...state, status: payload.status, type: payload.type };
     },
   },
