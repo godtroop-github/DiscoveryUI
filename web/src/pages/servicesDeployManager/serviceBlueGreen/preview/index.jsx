@@ -1,7 +1,7 @@
 import { Button, Result, Space, Radio, Modal, Divider, Row, Col, Typography, Menu, Dropdown, Tabs, Input } from 'antd';
 import React, { useState } from 'react';
 import { history } from 'umi';
-import { PlusOutlined, DownOutlined } from '@ant-design/icons';
+import { FileDoneOutlined, DownOutlined } from '@ant-design/icons';
 import { constant } from 'lodash';
 const { Title, Text, Link } = Typography;
 
@@ -44,11 +44,11 @@ const serviceBlueGreenAdd = () => {
  return (
   <>
      <Space>
-      <Button icon={<PlusOutlined />}
+      <Button icon={<FileDoneOutlined />}
        onClick={() => {
         setVisible(true);
        }}
-      >新增</Button>
+      >预览</Button>
      </Space>
      
 
