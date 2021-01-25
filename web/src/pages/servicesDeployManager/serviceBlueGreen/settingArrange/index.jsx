@@ -37,13 +37,6 @@ const settingArrange = () => {
               showSearch>
             </Select>
           </Col>
-          <Col flex={1}>
-            <Button type="primary" shape="circle" icon={<DownOutlined />}
-              onClick={() => {
-                setVisible(true);
-              }}
-            />
-          </Col>
         </Row>
         <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
           <Col flex="40px">绿</Col>
@@ -53,12 +46,6 @@ const settingArrange = () => {
               showSearch>
             </Select>
           </Col>
-          <Col flex={1}>
-            <Button type="primary" shape="circle" icon={<DownOutlined />}
-              onClick={() => {
-                setVisible(true);
-              }} />
-          </Col>
         </Row>
         <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
           <Col flex="40px">兜底</Col>
@@ -67,12 +54,6 @@ const settingArrange = () => {
               style={{ width: "100%" }}
               showSearch>
             </Select>
-          </Col>
-          <Col flex={1}>
-            <Button type="primary" shape="circle" icon={<DownOutlined />}
-              onClick={() => {
-                setVisible(true);
-              }} />
           </Col>
         </Row>
         <Row>

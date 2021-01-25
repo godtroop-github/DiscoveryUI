@@ -5,6 +5,26 @@ import { PlusOutlined, MinusOutlined, SettingOutlined, CaretRightOutlined, EditO
 
 const serviceBlueGreenSettingCondition = () => {
 
+ // 蓝绿条件运算条件
+ const [conditionRow, setConditionRow] = useState([{}]);
+
+ // 下一行增加运算条件
+ const addCondition = (item, index) => {
+
+  let row = {}
+  let conditionRowBak = conditionRow.concat()
+  conditionRowBak.splice(index + 1, 0, row);
+  setConditionRow(conditionRowBak)
+ }
+
+ // 删除当前这一行
+ const removeCondition = (item, index) => {
+
+  let conditionRowBak = conditionRow.concat()
+  conditionRowBak.splice(index)
+  setConditionRow(conditionRowBak)
+ }
+
  return (
   <>
    <Space direction="vertical">
@@ -14,47 +34,61 @@ const serviceBlueGreenSettingCondition = () => {
      <Col flex="90px">值</Col>
      <Col flex="120px">关系</Col>
     </Row>
-    <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
-     <Col flex="90px">
-      <Input placeholder="Basic usage" />
-     </Col>
-     <Col flex="60px">
-      <Select defaultValue="lucy" style={{ width: 60 }}>
-       <Option value="jack">==</Option>
-       <Option value="lucy">!=</Option>
-       <Option value="disabled">
-        &gt;
+    {
+     conditionRow.map((item, index) => {
+      return (
+       <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
+        <Col flex="90px">{/*  */}
+         <Input placeholder="Basic usage" value={item.args} onChange={(e) => {
+          item.args = e.target.value;
+          setConditionRow([...conditionRow, { index: item }])
+         }} />
+        </Col>
+        <Col flex="60px">
+         <Select defaultValue="lucy" style={{ width: 60 }} value={item.symbol}>
+          <Option value="jack">==</Option>
+          <Option value="lucy">!=</Option>
+          <Option value="disabled">
+           &gt;
                   </Option>
-       <Option value="Yiminghe">
-        &gt;=
+          <Option value="Yiminghe">
+           &gt;=
                   </Option>
-       <Option value="Yiminghe">
-        &lt;
+          <Option value="Yiminghe">
+           &lt;
                   </Option>
-       <Option value="Yiminghe">
-        &lt;=
+          <Option value="Yiminghe">
+           &lt;=
                   </Option>
-       <Option value="Yiminghe">
-        match
+          <Option value="Yiminghe">
+           match
                   </Option>
-      </Select>
-     </Col>
-     <Col flex="90px">
-      <Input placeholder="Basic usage" />
-     </Col>
-     <Col flex="70px">
-      <Select defaultValue="&&" style={{ width: 70 }}>
-       <Option value="disabled">&&</Option>
-       <Option value="Yiminghe">||</Option>
-      </Select>
-     </Col>
-     <Col flex={1}>
-      <Space>
-       <Button type="primary" shape="circle" icon={<PlusOutlined />} />
-       <Button type="primary" shape="circle" icon={<MinusOutlined />} />
-      </Space>
-     </Col>
-    </Row>
+         </Select>
+        </Col>
+        <Col flex="90px">
+         <Input placeholder="Basic usage" value={item.val} />
+        </Col>
+        <Col flex="70px">
+         {
+          index != conditionRow.length - 1 &&
+          <Select defaultValue="&&" style={{ width: 70 }} value={item.relation}>
+           <Option value="disabled">&&</Option>
+           <Option value="Yiminghe">||</Option>
+          </Select>
+         }
+
+        </Col>
+        <Col flex={1}>
+         <Space>
+          <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={() => { addCondition(item, index) }} />
+          <Button type="primary" shape="circle" icon={<MinusOutlined />} onClick={() => { removeCondition(item, index) }} />
+         </Space>
+        </Col>
+       </Row>
+      )
+     })
+    }
+
     <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
      <Col flex="40px">条件</Col>
      <Col flex="310px">

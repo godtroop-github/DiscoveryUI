@@ -57,6 +57,7 @@ const serviceBlueGreenAdd = () => {
     onCancel={() => {
      setVisible(false);
     }}
+    title={"新建配置[全链路服务蓝绿发布]"}
    >
     <Divider orientation="left">订阅参数</Divider>
 
