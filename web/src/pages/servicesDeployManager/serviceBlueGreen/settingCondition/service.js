@@ -7,6 +7,3 @@ export async function validateExpression(params) {
     params: params,
   });
 }
-export async function getFakeCaptcha(mobile) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
-}

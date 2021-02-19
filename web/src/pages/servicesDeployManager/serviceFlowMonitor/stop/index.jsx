@@ -1,28 +1,28 @@
 import { Button, Result, Space, Radio, Modal, Divider, Row, Col, Typography, Menu, Dropdown, Tabs, Input } from 'antd';
 import React, { useState } from 'react';
 import { history } from 'umi';
-import { CheckOutlined, DownOutlined } from '@ant-design/icons';
+import { PauseOutlined } from '@ant-design/icons';
 import { constant } from 'lodash';
 const { Title, Text, Link } = Typography;
 
-const serviceBlueGreenSave = () => {
+const serviceBlueGreenStop = () => {
  const [visible, setVisible] = useState(false);
- // 新建 - 确定
- const save = () => {
+ // 停止
+ const stop = () => {
 
  }
 
  return (
   <>
      <Space>
-      <Button icon={<CheckOutlined />}
+      <Button icon={<PauseOutlined /> }
        onClick={() => {
-        save();
+         stop();
        }}
-      >保存</Button>
+      >停止</Button>
      </Space>
   </>
  );
 };
 
-export default serviceBlueGreenSave;
+export default serviceBlueGreenStop;

@@ -6,17 +6,28 @@ import { constant } from 'lodash';
 import { groups, instanceMap } from '@/services/console'
 const { Title, Text, Link } = Typography;
 
-const serviceBlueGreenAdd = () => {
+const serviceBlueGreenAdd = (props) => {
 
   const [groupList, setGroupList] = useState([])
   const [visible, setVisible] = useState(false);
   const [subscribe, setSubscribe] = useState();
   const [instanceList, setInstanceList] = useState([]);
   const [subscribeInstance, setSubScribeInstance] = useState();
+  const [type, setType] = useState(1)
+  const [deployArgs, setDeployArgs] = useState(1)
+  const [publishArgs, setPublishArgs] = useState(1)
 
   // 新建 - 确定
   const addSubmit = () => {
     setVisible(false);
+    props.new({
+      type,
+      subscribe,
+      subscribeInstance,
+      deployArgs,
+      publishArgs
+    })
+
   }
 
   // 初始化服务组列表
@@ -25,7 +36,6 @@ const serviceBlueGreenAdd = () => {
     // 获取服务器组列表
     groups().then((res) => {
       setGroupList(res)
-      console.log(groupList)
     })
   }
 
@@ -54,7 +64,7 @@ const serviceBlueGreenAdd = () => {
         onCancel={() => {
           setVisible(false);
         }}
-        title={"新建配置[全链路服务蓝绿发布]"}
+        title={"新建配置[全链路服务灰度发布]"}
       >
         <Divider orientation="left">订阅参数</Divider>
 
@@ -65,7 +75,10 @@ const serviceBlueGreenAdd = () => {
             <Text>订阅类型</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio.Group name="radiogroup" defaultValue={1} value={type}
+              onChange={(e) => {
+                setType(e.target.value)
+              }}>
               <Radio value={1}>局部订阅</Radio>
               <Radio value={2}>全局订阅</Radio>
             </Radio.Group>
@@ -128,7 +141,10 @@ const serviceBlueGreenAdd = () => {
             <Text>部署模式</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio.Group name="radiogroup" defaultValue={1} value={deployArgs}
+              onChange={(e) => {
+                setDeployArgs(e.target.value)
+              }}>
               <Radio value={1}>域网管模式</Radio>
               <Radio value={2}>非域网关模式</Radio>
             </Radio.Group>
@@ -142,22 +158,12 @@ const serviceBlueGreenAdd = () => {
             <Text>发布策略</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio.Group name="radiogroup" defaultValue={1} value={publishArgs}
+              onChange={(e) => {
+                setPublishArgs(e.target.value)
+              }}>
               <Radio value={1}>版本策略</Radio>
               <Radio value={2}>区域策略</Radio>
-            </Radio.Group>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col flex="40px">
-          </Col>
-          <Col flex="100px">
-            <Text>路由类型</Text>
-          </Col>
-          <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
-              <Radio value={1}>蓝|绿|兜底</Radio>
-              <Radio value={2}>蓝|兜底</Radio>
             </Radio.Group>
           </Col>
         </Row>

@@ -5,8 +5,6 @@ import { PlusOutlined, MinusOutlined, SettingOutlined, CaretRightOutlined, EditO
 import { constant } from 'lodash';
 const { TabPane } = Tabs;
 
-const { Option } = Select;
-
 import ServiceBlueGreenPreview from './preview/index.jsx';
 import ServiceBlueGreenSave from './save/index.jsx';
 import ServiceBlueGreenNew from './add/index.jsx';
