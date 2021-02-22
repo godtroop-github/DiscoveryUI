@@ -145,7 +145,7 @@ const serviceBlueGreenAdd = (props) => {
               onChange={(e) => {
                 setDeployArgs(e.target.value)
               }}>
-              <Radio value={1}>域网管模式</Radio>
+              <Radio value={1}>域网关模式</Radio>
               <Radio value={2}>非域网关模式</Radio>
             </Radio.Group>
           </Col>

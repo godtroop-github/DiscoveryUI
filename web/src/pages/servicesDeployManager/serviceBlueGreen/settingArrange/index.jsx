@@ -1,18 +1,38 @@
 import { constant } from 'lodash';
 import { Select, Space, Row, Col, Button, Input, Modal, Divider } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { RedoOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
 
+import { instanceMap } from '@/services/console'
 
+const settingArrange = (props) => {
 
-const settingArrange = () => {
+  const gobal = props.gobal;
+
+  const [instanceList, setInstanceList] = useState([])
 
   const [visible, setVisible] = useState(false);
   const addSubmit = () => {
     setVisible(false);
   }
 
+  const initInstanceList = (instanceMap) => {
+    let list = []
+    for (var instanceName in instanceMap) {
+      list.push({
+        name: instanceName,
+        value: instanceMap[instanceName]
+      })
+    }
+    setInstanceList(list)
+  }
+
+  useEffect(() => {
+    if (gobal.subscribe) {
+      instanceMap([gobal.subscribe]).then(initInstanceList)
+    }
+  }, [gobal])
 
   return (
     <>
@@ -23,6 +43,13 @@ const settingArrange = () => {
             <Select
               style={{ width: "100%" }}
               showSearch>
+                {
+                instanceList.map(item => {
+                  return (
+                    <Option value={item.name}>{item.name}</Option>
+                  )
+                })
+              }
             </Select>
           </Col>
           <Col flex={1}>

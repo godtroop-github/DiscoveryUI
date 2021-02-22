@@ -6,17 +6,29 @@ import { constant } from 'lodash';
 import { groups, instanceMap } from '@/services/console'
 const { Title, Text, Link } = Typography;
 
-const serviceBlueGreenAdd = () => {
+const serviceBlueGreenAdd = (props) => {
 
   const [groupList, setGroupList] = useState([])
   const [visible, setVisible] = useState(false);
+  const [type, setType] = useState();
   const [subscribe, setSubscribe] = useState();
   const [instanceList, setInstanceList] = useState([]);
   const [subscribeInstance, setSubScribeInstance] = useState();
+  const [gatewayType, setGatewayType] = useState();
+  const [policy, setPolicy] = useState();
+  const [routeType, setRouteType] = useState();
 
   // 新建 - 确定
   const addSubmit = () => {
     setVisible(false);
+    props.new({
+      type,
+      subscribe,
+      subscribeInstance,
+      gatewayType,
+      policy,
+      routeType
+    })
   }
 
   // 初始化服务组列表
@@ -25,7 +37,6 @@ const serviceBlueGreenAdd = () => {
     // 获取服务器组列表
     groups().then((res) => {
       setGroupList(res)
-      console.log(groupList)
     })
   }
 
@@ -65,7 +76,11 @@ const serviceBlueGreenAdd = () => {
             <Text>订阅类型</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio.Group name="radiogroup" defaultValue={1} value={type}
+              onChange={(e) => {
+                setType(e.target.value)
+              }}
+            >
               <Radio value={1}>局部订阅</Radio>
               <Radio value={2}>全局订阅</Radio>
             </Radio.Group>
@@ -128,8 +143,12 @@ const serviceBlueGreenAdd = () => {
             <Text>部署模式</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
-              <Radio value={1}>域网管模式</Radio>
+            <Radio.Group name="radiogroup" defaultValue={1} value={gatewayType}
+              onChange={(e) => {
+                setGatewayType(e.target.value)
+              }}
+            >
+              <Radio value={1}>域网关模式</Radio>
               <Radio value={2}>非域网关模式</Radio>
             </Radio.Group>
           </Col>
@@ -142,7 +161,11 @@ const serviceBlueGreenAdd = () => {
             <Text>发布策略</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio.Group name="radiogroup" defaultValue={1} value={policy}
+              onChange={(e) => {
+                setPolicy(e.target.value)
+              }}
+            >
               <Radio value={1}>版本策略</Radio>
               <Radio value={2}>区域策略</Radio>
             </Radio.Group>
@@ -155,7 +178,11 @@ const serviceBlueGreenAdd = () => {
             <Text>路由类型</Text>
           </Col>
           <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1}>
+            <Radio.Group name="radiogroup" defaultValue={1} value={routeType}
+              onChange={(e) => {
+                setRouteType(e.target.value)
+              }}
+            >
               <Radio value={1}>蓝|绿|兜底</Radio>
               <Radio value={2}>蓝|兜底</Radio>
             </Radio.Group>
