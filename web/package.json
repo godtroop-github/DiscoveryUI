@@ -64,6 +64,7 @@
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.20",
     "gg-editor": "^2.0.2",
+    "insert-css": "^2.0.0",
     "lodash": "^4.17.11",
     "lodash-decorators": "^6.0.0",
     "lodash.debounce": "^4.0.8",

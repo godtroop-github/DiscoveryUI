@@ -8,9 +8,12 @@ const { TabPane } = Tabs;
 import ServiceBlueGreenPreview from './preview/index.jsx';
 import ServiceBlueGreenSave from './save/index.jsx';
 import ServiceBlueGreenNew from './add/index.jsx';
+import ServiceBlueGreenOpen from './open/index.jsx';
+import ServiceBlueGreenReload from './reload/index.jsx';
 import ServiceBlueGreenSettingCondition from './settingCondition/index.jsx';
 import ServiceBlueGreenSettingArrange from './settingArrange/index.jsx';
 import ServiceBlueGreenSettingArgs from './settingArgs/index.jsx';
+import ServiceBlueGreenView from './view/index.jsx';
 
 const serviceBlueGreen = (props) => {
 
@@ -28,11 +31,18 @@ const serviceBlueGreen = (props) => {
 
   return (
     <>
-      <Row>
-        <Col flex={10}>
-          <ServiceBlueGreenNew new={handleNew}></ServiceBlueGreenNew>
-          <ServiceBlueGreenPreview></ServiceBlueGreenPreview>
-          <ServiceBlueGreenSave></ServiceBlueGreenSave>
+      <Row wrap={false}>
+        <Col flex={1}>
+          <Row>
+            <Col><ServiceBlueGreenNew new={handleNew}></ServiceBlueGreenNew>
+              <ServiceBlueGreenOpen></ServiceBlueGreenOpen>
+              <ServiceBlueGreenPreview></ServiceBlueGreenPreview>
+              <ServiceBlueGreenSave></ServiceBlueGreenSave>
+              <ServiceBlueGreenReload></ServiceBlueGreenReload>
+              <ServiceBlueGreenView></ServiceBlueGreenView>
+            </Col>
+          </Row>
+
         </Col>
         <Col flex="450px">
           <Divider orientation="left">蓝绿条件</Divider>

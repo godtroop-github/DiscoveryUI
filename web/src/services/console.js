@@ -37,3 +37,10 @@ export async function getInstances(serviceId) {
     method: 'GET'
   });
 }
+// 校验策略的条件表达式
+export async function validateExpression(params) {
+  return request('/console/validate-expression', {
+    method: 'GET',
+    params: params,
+  });
+}

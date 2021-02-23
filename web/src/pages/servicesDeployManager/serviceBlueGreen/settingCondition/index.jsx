@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { history } from 'umi';
 import { PlusOutlined, MinusOutlined, SettingOutlined, CaretRightOutlined, EditOutlined } from '@ant-design/icons';
 
-import { validateExpression } from './service';
+import { validateExpression } from '@/services/console';
 
 const serviceBlueGreenSettingCondition = () => {
 

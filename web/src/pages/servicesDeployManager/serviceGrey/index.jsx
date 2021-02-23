@@ -5,6 +5,8 @@ import { connect } from 'umi';
 import ServiceGrayPreview from './preview/index.jsx';
 import ServiceGraySave from './save/index.jsx';
 import ServiceGrayNew from './add/index.jsx';
+import ServiceGrayOpen from './open/index.jsx';
+import ServiceGrayReload from './reload/index.jsx';
 import ServiceGraySettingCondition from './settingCondition/index.jsx';
 import ServiceGraySettingArrange from './settingArrange/index.jsx';
 
@@ -27,8 +29,10 @@ const serviceGrey = (props) => {
       <Row>
         <Col flex={10}>
           <ServiceGrayNew new={handleNew}></ServiceGrayNew>
+          <ServiceGrayOpen></ServiceGrayOpen>
           <ServiceGrayPreview></ServiceGrayPreview>
           <ServiceGraySave></ServiceGraySave>
+          <ServiceGrayReload></ServiceGrayReload>
         </Col>
         <Col flex="450px">
           <Divider orientation="left">灰度条件</Divider>

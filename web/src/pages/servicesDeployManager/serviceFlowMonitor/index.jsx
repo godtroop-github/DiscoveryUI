@@ -11,6 +11,7 @@ import ServiceFlowMonitorArgs from './args/index.jsx';
 import ServiceFlowMonitorEnter from './enter/index.jsx';
 import ServiceFlowMonitorExecute from './execute/index.jsx';
 import ServiceFlowMonitorLink from './link/index.jsx';
+import ServiceFlowMonitorLook from './look/index.jsx';
 
 const serviceFlowMonitor = () => {
   return (
@@ -19,6 +20,7 @@ const serviceFlowMonitor = () => {
         <Col flex={10}>
           <ServiceFlowMonitorStart></ServiceFlowMonitorStart>
           <ServiceFlowMonitorStop></ServiceFlowMonitorStop>
+          <ServiceFlowMonitorLook></ServiceFlowMonitorLook>
         </Col>
         <Col flex="450px">
           <Divider orientation="left">侦测入口</Divider>
