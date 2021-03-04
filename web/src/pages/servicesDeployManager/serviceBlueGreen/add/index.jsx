@@ -1,5 +1,5 @@
 import { Button, Result, Space, Radio, Modal, Divider, Row, Col, Typography, Select, Dropdown, Tabs, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 import { PlusOutlined, DownOutlined } from '@ant-design/icons';
 import { constant } from 'lodash';
@@ -21,23 +21,37 @@ const serviceBlueGreenAdd = (props) => {
   // 新建 - 确定
   const addSubmit = () => {
     setVisible(false);
+
+    instanceList.find(i => i.name == subscribeInstance)
+
     props.new({
       type,
       subscribe,
-      subscribeInstance,
+      subscribeInstanceKey: instanceList.find(i => i.name == subscribeInstance),
+      subscribeInstance: [],
       gatewayType,
       policy,
       routeType
     })
   }
 
-  // 初始化服务组列表
-  const init = () => {
-    setVisible(true);
+  useEffect(() => {
     // 获取服务器组列表
     groups().then((res) => {
       setGroupList(res)
+      if (res.length > 0) {
+        setSubscribe(res[0])
+        instanceMap(
+          [res[0]]
+        ).then((_res) => {
+          initInstanceList(_res)
+        })
+      }
     })
+  }, [])
+  // 初始化服务组列表
+  const init = () => {
+    setVisible(true);
   }
 
   // 初始化服务列表
@@ -50,6 +64,9 @@ const serviceBlueGreenAdd = (props) => {
       })
     }
     setInstanceList(list)
+    if (list.length > 0) {
+      setSubScribeInstance(list[0].name)
+    }
   }
 
   return (
@@ -106,7 +123,7 @@ const serviceBlueGreenAdd = (props) => {
               {
                 groupList.map((item, index) => {
                   return (
-                    <Option value={item}>{item}</Option>
+                    <Option key={index} value={item}>{item}</Option>
                   )
                 })
               }
@@ -128,7 +145,7 @@ const serviceBlueGreenAdd = (props) => {
               {
                 instanceList.map((item, index) => {
                   return (
-                    <Option value={item.name}>{item.name}</Option>
+                    <Option key={index} value={item.name}>{item.name}</Option>
                   )
                 })
               }

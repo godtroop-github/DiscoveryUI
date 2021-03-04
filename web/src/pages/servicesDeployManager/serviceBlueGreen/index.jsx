@@ -29,6 +29,14 @@ const serviceBlueGreen = (props) => {
     });
   }
 
+  const handleAdd = (values) => {
+    const { dispatch } = props;
+    dispatch({
+      type: 'serviceBlueGreen/add',
+      payload: { ...values },
+    });
+  }
+
   return (
     <>
       <Row wrap={false}>
@@ -39,7 +47,7 @@ const serviceBlueGreen = (props) => {
               <ServiceBlueGreenPreview></ServiceBlueGreenPreview>
               <ServiceBlueGreenSave></ServiceBlueGreenSave>
               <ServiceBlueGreenReload></ServiceBlueGreenReload>
-              <ServiceBlueGreenView></ServiceBlueGreenView>
+              <ServiceBlueGreenView gobal={gobal}></ServiceBlueGreenView>
             </Col>
           </Row>
 
@@ -55,7 +63,9 @@ const serviceBlueGreen = (props) => {
             </TabPane>
           </Tabs>
           <Divider orientation="left">蓝绿编排</Divider>
-          <ServiceBlueGreenSettingArrange gobal={gobal}></ServiceBlueGreenSettingArrange>
+          <ServiceBlueGreenSettingArrange
+           gobal={gobal}
+           add={handleAdd}></ServiceBlueGreenSettingArrange>
           <Divider orientation="left">蓝绿参数</Divider>
           <ServiceBlueGreenSettingArgs></ServiceBlueGreenSettingArgs>
         </Col>

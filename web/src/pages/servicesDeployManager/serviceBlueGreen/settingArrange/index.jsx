@@ -8,13 +8,32 @@ import { instanceMap } from '@/services/console'
 
 const settingArrange = (props) => {
 
-  const gobal = props.gobal;
+  const gobal = props.gobal
 
   const [instanceList, setInstanceList] = useState([])
+  const [serviceList, setServiceList] = useState([])
+  const [instance, setInstance] = useState()
+  const [blueService, setBlueService] = useState()
+  const [greenService, setGreenervice] = useState()
+  const [revealService, setRevealService] = useState()
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false)
   const addSubmit = () => {
     setVisible(false);
+  }
+
+  const addInstance = () => {
+    if (instance) {
+      props.add({
+        subscribeInstance: instanceList.find(i => i.name == instance),
+        arrange: {
+          name: instance,
+          blueService,
+          greenService,
+          revealService
+        }
+      })
+    }
   }
 
   const initInstanceList = (instanceMap) => {
@@ -26,6 +45,9 @@ const settingArrange = (props) => {
       })
     }
     setInstanceList(list)
+    if (list.length > 0) {
+      setInstance(list[0].name)
+    }
   }
 
   useEffect(() => {
@@ -33,6 +55,25 @@ const settingArrange = (props) => {
       instanceMap([gobal.subscribe]).then(initInstanceList)
     }
   }, [gobal])
+
+  useEffect(() => {
+    let _instance = instanceList.find(i => i.name == instance)
+    if (_instance) {
+      if (!_instance.value.find(i => i.version == 'default')) {
+        _instance.value.push({
+          version: 'default'
+        })
+      }
+      
+      setServiceList(_instance.value)
+      if (_instance.value.length > 0) {
+        setBlueService(_instance.value[0].version)
+        setGreenervice(_instance.value[0].version)
+        setRevealService(_instance.value[0].version)
+      }
+    }
+
+  }, [instance])
 
   return (
     <>
@@ -42,11 +83,15 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={instance}
+              onChange={(value) => {
+                setInstance(value)
+              }}
               showSearch>
-                {
-                instanceList.map(item => {
+              {
+                instanceList.map((item, index) => {
                   return (
-                    <Option value={item.name}>{item.name}</Option>
+                    <Option key={index} value={item.name}>{item.name}</Option>
                   )
                 })
               }
@@ -61,7 +106,18 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={blueService}
+              onChange={(value) => {
+                setBlueService(value)
+              }}
               showSearch>
+              {
+                serviceList.map((item, index) => {
+                  return (
+                    <Option key={index} value={item.version}>{item.version}</Option>
+                  )
+                })
+              }
             </Select>
           </Col>
         </Row>
@@ -70,7 +126,18 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={greenService}
+              onChange={(value) => {
+                setGreenervice(value)
+              }}
               showSearch>
+              {
+                serviceList.map((item, index) => {
+                  return (
+                    <Option key={index} value={item.version}>{item.version}</Option>
+                  )
+                })
+              }
             </Select>
           </Col>
         </Row>
@@ -79,14 +146,25 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={revealService}
+              onChange={(value) => {
+                setRevealService(value)
+              }}
               showSearch>
+              {
+                serviceList.map((item, index) => {
+                  return (
+                    <Option key={index} value={item.version}>{item.version}</Option>
+                  )
+                })
+              }
             </Select>
           </Col>
         </Row>
         <Row>
           <Col>
             <Space>
-              <Button type="primary" shape="round" icon={<EditOutlined />} >
+              <Button type="primary" shape="round" icon={<EditOutlined />} onClick={addInstance}>
                 添加
                   </Button>
               <Button type="primary" shape="round" icon={<EditOutlined />} >

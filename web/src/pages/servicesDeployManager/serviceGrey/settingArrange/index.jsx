@@ -12,6 +12,8 @@ const settingArrange = (props) => {
   const gobal = props.gobal;
 
   const [instanceList, setInstanceList] = useState([])
+  const [serviceList, setServiceList] = useState([])
+  const [instance, setInstance] = useState()
 
   const initInstanceList = (instanceMap) => {
     let list = []
@@ -38,6 +40,10 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={instance}
+              onChange={(value) => {
+                setInstance(value)
+              }}
               showSearch>
               {
                 instanceList.map(item => {
@@ -67,6 +73,13 @@ const settingArrange = (props) => {
             <Select
               style={{ width: "100%" }}
               showSearch>
+                {
+                serviceList.map(item => {
+                  return (
+                    <Option value={item.version}>{item.version}</Option>
+                  )
+                })
+              }
             </Select>
           </Col>
         </Row>
