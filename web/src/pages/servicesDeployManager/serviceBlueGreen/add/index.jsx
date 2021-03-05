@@ -22,13 +22,12 @@ const serviceBlueGreenAdd = (props) => {
   const addSubmit = () => {
     setVisible(false);
 
-    instanceList.find(i => i.name == subscribeInstance)
-
     props.new({
       type,
       subscribe,
       subscribeInstanceKey: instanceList.find(i => i.name == subscribeInstance),
       subscribeInstance: [],
+      arrange: [],
       gatewayType,
       policy,
       routeType
@@ -92,14 +91,14 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>订阅类型</Text>
           </Col>
-          <Col auto>
-            <Radio.Group name="radiogroup" defaultValue={1} value={type}
+          <Col flex="auto">
+            <Radio.Group name="radiogroup" defaultValue={'1'} value={type}
               onChange={(e) => {
                 setType(e.target.value)
               }}
             >
-              <Radio value={1}>局部订阅</Radio>
-              <Radio value={2}>全局订阅</Radio>
+              <Radio value={'1'}>局部订阅</Radio>
+              <Radio value={'2'}>全局订阅</Radio>
             </Radio.Group>
           </Col>
         </Row>
@@ -109,7 +108,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>订阅组名</Text>
           </Col>
-          <Col auto>
+          <Col autflex="auto">
             <Select defaultValue='' style={{ width: 300 }} value={subscribe}
               onChange={(value) => {
                 setSubscribe(value)
@@ -123,7 +122,7 @@ const serviceBlueGreenAdd = (props) => {
               {
                 groupList.map((item, index) => {
                   return (
-                    <Option key={index} value={item}>{item}</Option>
+                    <Select.Option key={index} value={item}>{item}</Select.Option>
                   )
                 })
               }
@@ -136,7 +135,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>订阅服务名</Text>
           </Col>
-          <Col auto>
+          <Col flex="auto">
             <Select defaultValue='' style={{ width: 300 }} value={subscribeInstance}
               onChange={(value) => {
                 setSubScribeInstance(value)
@@ -145,7 +144,7 @@ const serviceBlueGreenAdd = (props) => {
               {
                 instanceList.map((item, index) => {
                   return (
-                    <Option key={index} value={item.name}>{item.name}</Option>
+                    <Select.Option key={index} value={item.name}>{item.name}</Select.Option>
                   )
                 })
               }
@@ -159,7 +158,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>部署模式</Text>
           </Col>
-          <Col auto>
+          <Col flex="auto">
             <Radio.Group name="radiogroup" defaultValue={1} value={gatewayType}
               onChange={(e) => {
                 setGatewayType(e.target.value)
@@ -177,7 +176,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>发布策略</Text>
           </Col>
-          <Col auto>
+          <Col flex="auto">
             <Radio.Group name="radiogroup" defaultValue={1} value={policy}
               onChange={(e) => {
                 setPolicy(e.target.value)
@@ -194,7 +193,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>路由类型</Text>
           </Col>
-          <Col auto>
+          <Col flex="auto">
             <Radio.Group name="radiogroup" defaultValue={1} value={routeType}
               onChange={(e) => {
                 setRouteType(e.target.value)

@@ -37,6 +37,14 @@ const serviceBlueGreen = (props) => {
     });
   }
 
+  const handleEdit = (values) => {
+    const {dispatch} = props
+    dispatch({
+      type: 'serviceBlueGreen/edit',
+      payload: {...values}
+    })
+  }
+
   return (
     <>
       <Row wrap={false}>
@@ -65,7 +73,8 @@ const serviceBlueGreen = (props) => {
           <Divider orientation="left">蓝绿编排</Divider>
           <ServiceBlueGreenSettingArrange
            gobal={gobal}
-           add={handleAdd}></ServiceBlueGreenSettingArrange>
+           add={handleAdd}
+           edit={handleEdit}></ServiceBlueGreenSettingArrange>
           <Divider orientation="left">蓝绿参数</Divider>
           <ServiceBlueGreenSettingArgs></ServiceBlueGreenSettingArgs>
         </Col>

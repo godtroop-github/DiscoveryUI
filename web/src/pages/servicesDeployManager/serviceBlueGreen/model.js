@@ -17,17 +17,43 @@ const Model = {
   *add({ payload }, { call, put, select }) {
    const gobal = yield select(state => state.serviceBlueGreen.gobal)
    console.log(gobal)
-   let name = payload.subscribeInstance.name
-   if (gobal.subscribeInstanceKey.name == name || gobal.subscribeInstance.find(i => i.name == name)) {
+   let name = payload.arrange.name
+   !gobal.arrange && (gobal.arrange = []) 
+   if (gobal.subscribeInstanceKey.name == name || gobal.arrange.find(i => i.name == name)) {
     message.error(`${name} 已经有了`);
    } else {
     let _gobal = Object.assign({}, gobal)
-    !_gobal.arrange && (_gobal.arrange = []) 
     _gobal.arrange.push(payload.arrange)
     yield put({
      type: 'changeGobal',
      payload: _gobal
     })
+   }
+  },
+  *edit({payload}, {call, put, select}) {
+   const gobal = yield select(state => state.serviceBlueGreen.gobal)
+   let name = payload.arrange.name
+   if (gobal.subscribeInstanceKey.name == name) {
+    return
+   }
+   let index = 0
+   let _arrange = gobal.arrange.find((i, _index) => {
+    if (i.name == name) {
+     index = _index
+     return true
+    } else {
+     return false
+    }
+   })
+   if (!_arrange) {
+    message.error(`${name} 还没有添加`);
+   } else {
+    let _gobal = Object.assign({}, gobal)
+     _gobal.arrange[index] = payload.arrange
+     yield put({
+      type: 'changeGobal',
+      payload: _gobal
+     })
    }
   }
  },

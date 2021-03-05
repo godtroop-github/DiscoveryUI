@@ -1,5 +1,5 @@
 import { Button, Result, Space, Radio, Modal, Divider, Row, Col, Typography, Select, Dropdown, Tabs, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 import { PlusOutlined, DownOutlined } from '@ant-design/icons';
 import { constant } from 'lodash';
@@ -23,20 +23,33 @@ const serviceBlueGreenAdd = (props) => {
     props.new({
       type,
       subscribe,
-      subscribeInstance,
+      subscribeInstanceKey: instanceList.find(i => i.name == subscribeInstance),
+      subscribeInstance: [],
+      arrange: [],
       deployArgs,
       publishArgs
     })
 
   }
 
-  // 初始化服务组列表
-  const init = () => {
-    setVisible(true);
+  useEffect(() => {
     // 获取服务器组列表
     groups().then((res) => {
       setGroupList(res)
+      if (res.length > 0) {
+        setSubscribe(res[0])
+        instanceMap(
+          [res[0]]
+        ).then((_res) => {
+          initInstanceList(_res)
+        })
+      }
     })
+  }, [])
+
+  // 初始化服务组列表
+  const init = () => {
+    setVisible(true);
   }
 
   // 初始化服务列表
@@ -49,6 +62,9 @@ const serviceBlueGreenAdd = (props) => {
       })
     }
     setInstanceList(list)
+    if (list.length > 0) {
+      setSubScribeInstance(list[0].name)
+    }
   }
 
   return (
@@ -74,7 +90,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>订阅类型</Text>
           </Col>
-          <Col auto>
+          <Col flex={'auto'}>
             <Radio.Group name="radiogroup" defaultValue={1} value={type}
               onChange={(e) => {
                 setType(e.target.value)
@@ -90,7 +106,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>订阅组名</Text>
           </Col>
-          <Col auto>
+          <Col flex={'auto'}>
             <Select defaultValue='' style={{ width: 300 }} value={subscribe}
               onChange={(value) => {
                 setSubscribe(value)
@@ -104,7 +120,7 @@ const serviceBlueGreenAdd = (props) => {
               {
                 groupList.map((item, index) => {
                   return (
-                    <Option value={item}>{item}</Option>
+                    <Select.Option key={index} value={item}>{item}</Select.Option>
                   )
                 })
               }
@@ -117,7 +133,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>订阅服务名</Text>
           </Col>
-          <Col auto>
+          <Col flex={'auto'}>
             <Select defaultValue='' style={{ width: 300 }} value={subscribeInstance}
               onChange={(value) => {
                 setSubScribeInstance(value)
@@ -126,7 +142,7 @@ const serviceBlueGreenAdd = (props) => {
               {
                 instanceList.map((item, index) => {
                   return (
-                    <Option value={item.name}>{item.name}</Option>
+                    <Select.Option key={index} value={item.name}>{item.name}</Select.Option>
                   )
                 })
               }
@@ -140,7 +156,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>部署模式</Text>
           </Col>
-          <Col auto>
+          <Col flex={'auto'}>
             <Radio.Group name="radiogroup" defaultValue={1} value={deployArgs}
               onChange={(e) => {
                 setDeployArgs(e.target.value)
@@ -157,7 +173,7 @@ const serviceBlueGreenAdd = (props) => {
           <Col flex="100px">
             <Text>发布策略</Text>
           </Col>
-          <Col auto>
+          <Col flex={'auto'}>
             <Radio.Group name="radiogroup" defaultValue={1} value={publishArgs}
               onChange={(e) => {
                 setPublishArgs(e.target.value)

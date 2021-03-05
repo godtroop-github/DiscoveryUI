@@ -1,8 +1,8 @@
 import { constant } from 'lodash';
-import { Select, Space, Row, Col, Button, Input, Modal, Divider } from 'antd';
+import { Select, Space, Row, Col, Button } from 'antd';
 import React, { useState } from 'react';
 
-import { RedoOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
+import { RedoOutlined, EditOutlined } from '@ant-design/icons';
 import { useEffect } from 'react';
 
 import { instanceMap } from '@/services/console'
@@ -14,6 +14,33 @@ const settingArrange = (props) => {
   const [instanceList, setInstanceList] = useState([])
   const [serviceList, setServiceList] = useState([])
   const [instance, setInstance] = useState()
+  const [grayService, setGrayService] = useState()
+  const [stableService, setStableService] = useState()
+
+  const addInstance = () => {
+    if (instance) {
+      props.add({
+        subscribeInstance: instanceList.find(i => i.name == instance),
+        arrange: {
+          name: instance,
+          grayService,
+          stableService
+        }
+      })
+    }
+  }
+
+  const editInstance = () => {
+    if (instance) {
+      props.edit({
+        arrange: {
+          name: instance,
+          grayService,
+          stableService
+        }
+      })
+    }
+  }
 
   const initInstanceList = (instanceMap) => {
     let list = []
@@ -24,6 +51,9 @@ const settingArrange = (props) => {
       })
     }
     setInstanceList(list)
+    if (list.length > 0 && !instance) {
+      setInstance(list[0].name)
+    }
   }
 
   useEffect(() => {
@@ -31,6 +61,24 @@ const settingArrange = (props) => {
       instanceMap([gobal.subscribe]).then(initInstanceList)
     }
   }, [gobal])
+
+  useEffect(() => {
+    let _instance = instanceList.find(i => i.name == instance)
+    if (_instance) {
+      if (!_instance.value.find(i => i.version == 'default')) {
+        _instance.value.push({
+          version: 'default'
+        })
+      }
+      
+      setServiceList(_instance.value)
+      if (_instance.value.length > 0) {
+        setGrayService(_instance.value[0].version)
+        setStableService(_instance.value[0].version)
+      }
+    }
+
+  }, [instance])
 
   return (
     <>
@@ -46,9 +94,9 @@ const settingArrange = (props) => {
               }}
               showSearch>
               {
-                instanceList.map(item => {
+                instanceList.map((item, index) => {
                   return (
-                    <Option value={item.name}>{item.name}</Option>
+                    <Select.Option key={index} value={item.name}>{item.name}</Select.Option>
                   )
                 })
               }
@@ -63,7 +111,18 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={grayService}
+              onChange={(value) => {
+                setGrayService(value)
+              }}
               showSearch>
+                {
+                serviceList.map((item, index) => {
+                  return (
+                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
+                  )
+                })
+              }
             </Select>
           </Col>
         </Row>
@@ -72,11 +131,15 @@ const settingArrange = (props) => {
           <Col flex="310px">
             <Select
               style={{ width: "100%" }}
+              value={stableService}
+              onChange={(value) => {
+                setStableService(value)
+              }}
               showSearch>
                 {
-                serviceList.map(item => {
+                serviceList.map((item, index) => {
                   return (
-                    <Option value={item.version}>{item.version}</Option>
+                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
                   )
                 })
               }
@@ -86,10 +149,10 @@ const settingArrange = (props) => {
         <Row>
           <Col>
             <Space>
-              <Button type="primary" shape="round" icon={<EditOutlined />} >
+              <Button type="primary" shape="round" icon={<EditOutlined />} onClick={addInstance}>
                 添加
                   </Button>
-              <Button type="primary" shape="round" icon={<EditOutlined />} >
+              <Button type="primary" shape="round" icon={<EditOutlined />} onClick={editInstance}>
                 修改
                   </Button>
             </Space>

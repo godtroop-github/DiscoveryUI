@@ -92,7 +92,7 @@ const validCondition = () => {
      conditionRow.map((item, index) => {
       return (
        <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
-        <Col flex="90px">{/*  */}
+        <Col flex="90px">
          <Input placeholder="Basic usage" value={item.args} onChange={(e) => {
           item.args = e.target.value;
           setConditionRow(conditionRow.map((_item, _index) => _index == index ? item : _item))
@@ -105,23 +105,23 @@ const validCondition = () => {
            setConditionRow(conditionRow.map((_item, _index) => _index == index ? item : _item))
           }}
          >
-          <Option value="==">==</Option>
-          <Option value="!=">!=</Option>
-          <Option value=">">
+          <Select.Option key={1} value="==">==</Select.Option>
+          <Select.Option key={2} value="!=">!=</Select.Option>
+          <Select.Option key={3} value=">">
            &gt;
-                  </Option>
-          <Option value=">=">
+                  </Select.Option>
+          <Select.Option key={4} value=">=">
            &gt;=
-                  </Option>
-          <Option value="<">
+                  </Select.Option>
+          <Select.Option key={5} value="<">
            &lt;
-                  </Option>
-          <Option value="<=">
+                  </Select.Option>
+          <Select.Option key={6} value="<=">
            &lt;=
-                  </Option>
-          <Option value="matches">
+                  </Select.Option>
+          <Select.Option key={7} value="matches">
            matches
-                  </Option>
+                  </Select.Option>
          </Select>
         </Col>
         <Col flex="90px">
@@ -133,14 +133,14 @@ const validCondition = () => {
         <Col flex="70px">
          {
           index != conditionRow.length - 1 &&
-          <Select defaultValue="&&" style={{ width: 70 }} value={item.relation}
+          <Select defaultValue={"&&"} style={{ width: 70 }} value={item.relation}
           
           onChange={(value) => {
            item.relation = value;
            setConditionRow(conditionRow.map((_item, _index) => _index == index ? item : _item))
           }}>
-           <Option value="&&">&&</Option>
-           <Option value="||">||</Option>
+           <Select.Option key={1} value={"&&"}>&&</Select.Option>
+           <Select.Option key={2} value={"||"}>||</Select.Option>
           </Select>
          }
 

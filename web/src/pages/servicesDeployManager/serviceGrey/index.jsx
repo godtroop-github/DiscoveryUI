@@ -9,6 +9,7 @@ import ServiceGrayOpen from './open/index.jsx';
 import ServiceGrayReload from './reload/index.jsx';
 import ServiceGraySettingCondition from './settingCondition/index.jsx';
 import ServiceGraySettingArrange from './settingArrange/index.jsx';
+import ServiceGrayView from './view';
 
 const serviceGrey = (props) => {
   
@@ -24,21 +25,41 @@ const serviceGrey = (props) => {
     });
   }
 
+  const handleAdd = (values) => {
+    const { dispatch } = props;
+    dispatch({
+      type: 'serviceGray/add',
+      payload: { ...values },
+    });
+  }
+
+  const handleEdit = (values) => {
+    const {dispatch} = props
+    dispatch({
+      type: 'serviceGray/edit',
+      payload: {...values}
+    })
+  }
+
   return (
     <>
-      <Row>
-        <Col flex={10}>
+      <Row wrap={false}>
+        <Col flex={1}>
           <ServiceGrayNew new={handleNew}></ServiceGrayNew>
           <ServiceGrayOpen></ServiceGrayOpen>
           <ServiceGrayPreview></ServiceGrayPreview>
           <ServiceGraySave></ServiceGraySave>
           <ServiceGrayReload></ServiceGrayReload>
+          <ServiceGrayView gobal={gobal}></ServiceGrayView>
         </Col>
         <Col flex="450px">
           <Divider orientation="left">灰度条件</Divider>
           <ServiceGraySettingCondition></ServiceGraySettingCondition>
           <Divider orientation="left">灰度编排</Divider>
-          <ServiceGraySettingArrange  gobal={gobal}></ServiceGraySettingArrange>
+          <ServiceGraySettingArrange 
+            gobal={gobal}
+            add={handleAdd}
+            edit={handleEdit}></ServiceGraySettingArrange>
         </Col>
       </Row>
     </>

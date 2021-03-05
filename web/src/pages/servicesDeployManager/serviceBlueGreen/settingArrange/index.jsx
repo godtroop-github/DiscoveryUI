@@ -17,15 +17,23 @@ const settingArrange = (props) => {
   const [greenService, setGreenervice] = useState()
   const [revealService, setRevealService] = useState()
 
-  const [visible, setVisible] = useState(false)
-  const addSubmit = () => {
-    setVisible(false);
-  }
-
   const addInstance = () => {
     if (instance) {
       props.add({
         subscribeInstance: instanceList.find(i => i.name == instance),
+        arrange: {
+          name: instance,
+          blueService,
+          greenService,
+          revealService
+        }
+      })
+    }
+  }
+
+  const editInstance = () => {
+    if (instance) {
+      props.edit({
         arrange: {
           name: instance,
           blueService,
@@ -45,7 +53,7 @@ const settingArrange = (props) => {
       })
     }
     setInstanceList(list)
-    if (list.length > 0) {
+    if (list.length > 0 && !instance) {
       setInstance(list[0].name)
     }
   }
@@ -91,7 +99,7 @@ const settingArrange = (props) => {
               {
                 instanceList.map((item, index) => {
                   return (
-                    <Option key={index} value={item.name}>{item.name}</Option>
+                    <Select.Option key={index} value={item.name}>{item.name}</Select.Option>
                   )
                 })
               }
@@ -114,7 +122,7 @@ const settingArrange = (props) => {
               {
                 serviceList.map((item, index) => {
                   return (
-                    <Option key={index} value={item.version}>{item.version}</Option>
+                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
                   )
                 })
               }
@@ -134,7 +142,7 @@ const settingArrange = (props) => {
               {
                 serviceList.map((item, index) => {
                   return (
-                    <Option key={index} value={item.version}>{item.version}</Option>
+                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
                   )
                 })
               }
@@ -154,7 +162,7 @@ const settingArrange = (props) => {
               {
                 serviceList.map((item, index) => {
                   return (
-                    <Option key={index} value={item.version}>{item.version}</Option>
+                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
                   )
                 })
               }
@@ -167,7 +175,7 @@ const settingArrange = (props) => {
               <Button type="primary" shape="round" icon={<EditOutlined />} onClick={addInstance}>
                 添加
                   </Button>
-              <Button type="primary" shape="round" icon={<EditOutlined />} >
+              <Button type="primary" shape="round" icon={<EditOutlined />} onClick={editInstance}>
                 修改
                   </Button>
             </Space>
@@ -175,15 +183,6 @@ const settingArrange = (props) => {
           </Col>
         </Row>
       </Space>
-      <Modal visible={visible}
-        onOk={addSubmit}
-        onCancel={() => {
-          setVisible(false);
-        }}
-      >
-        <Divider orientation="left">元数据拾取器</Divider>
-
-      </Modal>
     </>
   )
 }
