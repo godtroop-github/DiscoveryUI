@@ -12,16 +12,31 @@ import ServiceGraySettingArrange from './settingArrange/index.jsx';
 import ServiceGrayView from './view';
 
 const serviceGrey = (props) => {
-  
+
   // 当前页面的全局配置,在各个组件间传递
-  const {serviceGray = {}} = props
-  const {gobal = {}} = serviceGray
-  
+  const { serviceGray = {} } = props
+  const { gobal = {}, condition = {}, version } = serviceGray
+
   const handleNew = (values) => {
     const { dispatch } = props;
     dispatch({
       type: 'serviceGray/new',
       payload: { ...values },
+    });
+  }
+
+  const handlerUpdateCondition = (values) => {
+    const { dispatch } = props;
+    dispatch({
+      type: 'serviceGray/updateCondition',
+      payload: { ...values },
+    });
+  }
+
+  const handlerUpdateVersion = () => {
+    const { dispatch } = props;
+    dispatch({
+      type: 'serviceGray/updateVersion'
     });
   }
 
@@ -34,30 +49,50 @@ const serviceGrey = (props) => {
   }
 
   const handleEdit = (values) => {
-    const {dispatch} = props
+    const { dispatch } = props
     dispatch({
       type: 'serviceGray/edit',
-      payload: {...values}
+      payload: { ...values }
     })
   }
 
   return (
     <>
-      <Row wrap={false}>
-        <Col flex={1}>
-          <ServiceGrayNew new={handleNew}></ServiceGrayNew>
-          <ServiceGrayOpen></ServiceGrayOpen>
-          <ServiceGrayPreview></ServiceGrayPreview>
-          <ServiceGraySave></ServiceGraySave>
-          <ServiceGrayReload></ServiceGrayReload>
-          <ServiceGrayView gobal={gobal}></ServiceGrayView>
+      <Row wrap={false} justify="space-around">
+        <Col flex={1} style={{ 'display': 'flex', 'flex-flow': 'column' }}>
+          <Row>
+            <Col>
+              <ServiceGrayNew new={handleNew}></ServiceGrayNew>
+              <ServiceGrayOpen
+                new={handleNew}
+                updateCondition={handlerUpdateCondition}
+                updateVersion={handlerUpdateVersion}
+              ></ServiceGrayOpen>
+              <ServiceGrayPreview
+                gobal={gobal} condition={condition}
+              ></ServiceGrayPreview>
+              {/* <ServiceGraySave */}
+              {/* gobal={gobal} condition={condition}  */}
+              {/* ></ServiceGraySave> */}
+              {/* <ServiceGrayReload></ServiceGrayReload> */}
+
+            </Col>
+          </Row>
+          <ServiceGrayView 
+            gobal={gobal} condition={condition}></ServiceGrayView>
         </Col>
         <Col flex="450px">
           <Divider orientation="left">灰度条件</Divider>
-          <ServiceGraySettingCondition></ServiceGraySettingCondition>
+          <ServiceGraySettingCondition
+            type={'gray'}
+            condition={condition}
+            version={version}
+            update={handlerUpdateCondition}
+          ></ServiceGraySettingCondition>
           <Divider orientation="left">灰度编排</Divider>
-          <ServiceGraySettingArrange 
+          <ServiceGraySettingArrange
             gobal={gobal}
+            version={version}
             add={handleAdd}
             edit={handleEdit}></ServiceGraySettingArrange>
         </Col>

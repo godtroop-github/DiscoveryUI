@@ -10,23 +10,31 @@ const serviceBlueGreenAdd = (props) => {
 
   const [groupList, setGroupList] = useState([])
   const [visible, setVisible] = useState(false);
-  const [type, setType] = useState();
+  const [type, setType] = useState('1');
   const [subscribe, setSubscribe] = useState();
   const [instanceList, setInstanceList] = useState([]);
   const [subscribeInstance, setSubScribeInstance] = useState();
-  const [gatewayType, setGatewayType] = useState();
-  const [policy, setPolicy] = useState();
-  const [routeType, setRouteType] = useState();
+  const [gatewayType, setGatewayType] = useState(1);
+  const [policy, setPolicy] = useState(1);
+  const [routeType, setRouteType] = useState(1);
 
   // 新建 - 确定
   const addSubmit = () => {
     setVisible(false);
 
+    let subscribeInstanceKey
+    if (type == 1) {
+      subscribeInstanceKey = instanceList.find(i => i.name == subscribeInstance)
+    } else {
+      subscribeInstanceKey = {
+        name: subscribe
+      }
+    }
     props.new({
       type,
       subscribe,
-      subscribeInstanceKey: instanceList.find(i => i.name == subscribeInstance),
-      subscribeInstance: [],
+      subscribeInstanceKey,
+      // subscribeInstance: [],
       arrange: [],
       gatewayType,
       policy,
@@ -129,46 +137,51 @@ const serviceBlueGreenAdd = (props) => {
             </Select>
           </Col>
         </Row>
-        <Row align="middle" gutter={[16, 16]}>
-          <Col flex="40px">
-          </Col>
-          <Col flex="100px">
-            <Text>订阅服务名</Text>
-          </Col>
-          <Col flex="auto">
-            <Select defaultValue='' style={{ width: 300 }} value={subscribeInstance}
-              onChange={(value) => {
-                setSubScribeInstance(value)
-              }}
-            >
-              {
-                instanceList.map((item, index) => {
-                  return (
-                    <Select.Option key={index} value={item.name}>{item.name}</Select.Option>
-                  )
-                })
-              }
-            </Select>
-          </Col>
-        </Row>
-        <Divider orientation="left">部署参数</Divider>
-        <Row gutter={[16, 16]}>
-          <Col flex="40px">
-          </Col>
-          <Col flex="100px">
-            <Text>部署模式</Text>
-          </Col>
-          <Col flex="auto">
-            <Radio.Group name="radiogroup" defaultValue={1} value={gatewayType}
-              onChange={(e) => {
-                setGatewayType(e.target.value)
-              }}
-            >
-              <Radio value={1}>域网关模式</Radio>
-              <Radio value={2}>非域网关模式</Radio>
-            </Radio.Group>
-          </Col>
-        </Row>
+        {
+          type == 1 && (
+            <><Row align="middle" gutter={[16, 16]}>
+              <Col flex="40px">
+              </Col>
+              <Col flex="100px">
+                <Text>订阅服务名</Text>
+              </Col>
+              <Col flex="auto">
+                <Select defaultValue='' style={{ width: 300 }} value={subscribeInstance}
+                  onChange={(value) => {
+                    setSubScribeInstance(value)
+                  }}
+                >
+                  {
+                    instanceList.map((item, index) => {
+                      return (
+                        <Select.Option key={index} value={item.name}>{item.name}</Select.Option>
+                      )
+                    })
+                  }
+                </Select>
+              </Col>
+            </Row>
+              <Divider orientation="left">部署参数</Divider>
+              <Row gutter={[16, 16]}>
+                <Col flex="40px">
+                </Col>
+                <Col flex="100px">
+                  <Text>部署模式</Text>
+                </Col>
+                <Col flex="auto">
+                  <Radio.Group name="radiogroup" defaultValue={1} value={gatewayType}
+                    onChange={(e) => {
+                      setGatewayType(e.target.value)
+                    }}
+                  >
+                    <Radio value={1}>域网关模式</Radio>
+                    <Radio value={2}>非域网关模式</Radio>
+                  </Radio.Group>
+                </Col>
+              </Row>
+            </>
+          )
+        }
         <Divider orientation="left">发布参数</Divider>
         <Row gutter={[16, 16]}>
           <Col flex="40px">

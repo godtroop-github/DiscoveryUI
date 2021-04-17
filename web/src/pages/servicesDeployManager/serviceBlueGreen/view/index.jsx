@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import G6 from '@antv/g6';
 import insertCss from 'insert-css';
 import { node } from 'prop-types';
+import { Col, Row } from 'antd'
 
 // 我们用 insert-css 演示引入自定义样式
 // 推荐将样式添加到自己的样式文件中
@@ -28,7 +29,7 @@ const service = (props) => {
 
   useEffect(() => {
     G6.registerNode(
-      'sql',
+      'blue',
       {
         drawShape(cfg, group) {
           const rect = group.addShape('rect', {
@@ -43,17 +44,88 @@ const service = (props) => {
               lineWidth: 3,
             },
             name: 'rect-shape',
-          });
+          })
           if (cfg.name) {
             group.addShape('text', {
               attrs: {
                 text: cfg.name,
                 x: 0,
-                y: 0,
+                y: -40,
                 fill: '#00287E',
                 fontSize: 14,
                 textAlign: 'center',
-                textBaseline: 'middle',
+                fontWeight: 'bold',
+              },
+              name: 'text-shape',
+            });
+          }
+          return rect;
+        },
+      },
+      'single-node',
+    );
+    G6.registerNode(
+      'green',
+      {
+        drawShape(cfg, group) {
+          const rect = group.addShape('rect', {
+            attrs: {
+              x: -75,
+              y: -25,
+              width: 150,
+              height: 50,
+              radius: 10,
+              stroke: '#99ff00',
+              fill: '#99ff99',
+              lineWidth: 3,
+            },
+            name: 'rect-shape',
+          })
+          if (cfg.name) {
+            group.addShape('text', {
+              attrs: {
+                text: cfg.name,
+                x: 0,
+                y: -40,
+                fill: '#00287E',
+                fontSize: 14,
+                textAlign: 'center',
+                fontWeight: 'bold',
+              },
+              name: 'text-shape',
+            });
+          }
+          return rect;
+        },
+      },
+      'single-node',
+    );
+    G6.registerNode(
+      'yellow',
+      {
+        drawShape(cfg, group) {
+          const rect = group.addShape('rect', {
+            attrs: {
+              x: -75,
+              y: -25,
+              width: 150,
+              height: 50,
+              radius: 10,
+              stroke: '#ff9900',
+              fill: '#ffcc00',
+              lineWidth: 3,
+            },
+            name: 'rect-shape',
+          })
+          if (cfg.name) {
+            group.addShape('text', {
+              attrs: {
+                text: cfg.name,
+                x: 0,
+                y: -40,
+                fill: '#00287E',
+                fontSize: 14,
+                textAlign: 'center',
                 fontWeight: 'bold',
               },
               name: 'text-shape',
@@ -66,10 +138,11 @@ const service = (props) => {
     );
     if (!graph) {
       const container = ReactDOM.findDOMNode(ref.current);
-      console.log(container)
+
       const width = container.scrollWidth;
       const height = container.scrollHeight || 500;
-
+      console.log(width)
+      console.log(height)
       let _graph = new G6.Graph({
         container: container,
         width,
@@ -86,7 +159,7 @@ const service = (props) => {
           controlPoints: true,
         },
         defaultNode: {
-          type: 'sql',
+          type: 'blue',
         },
         defaultEdge: {
           type: 'polyline',
@@ -134,7 +207,7 @@ const service = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log(graph)
+    console.log(gobal)
     if (graph) {
 
       let nodes = []
@@ -162,29 +235,51 @@ const service = (props) => {
           nodes.push({
             id: _blueService + "_blue",
             dataType: 'alps',
-            label: _blueService
+            label: item.blueService,
+            name: item.name
           })
-          nodes.push({
-            id: _greenService + "_green",
-            dataType: 'alps',
-            label: _greenService
-          })
+          // 蓝绿路由
+          if (gobal.routeType == 1) {
+            nodes.push({
+              id: _greenService + "_green",
+              dataType: 'alps',
+              label: item.greenService,
+              name: item.name,
+              type: "green"
+            })
+          }
           nodes.push({
             id: _revealService + "_reveal",
             dataType: 'alps',
-            label: _revealService
+            label: item.revealService,
+            name: item.name,
+            type: "yellow"
           })
           edges.push({
             source: _blueNode,
-            target: _blueService + "_blue"
+            target: _blueService + "_blue",
+            label: '蓝路由',
+            style: {
+              stroke: '#C2C8D5'
+            }
           })
-          edges.push({
-            source: _greenNode,
-            target: _greenService + "_green"
-          })
+          if (gobal.routeType == 1) {
+            edges.push({
+              source: _greenNode,
+              target: _greenService + "_green",
+              label: '绿路由',
+              style: {
+                stroke: '#336600'
+              }
+            })
+          }
           edges.push({
             source: _revealNode,
-            target: _revealService + "_reveal"
+            target: _revealService + "_reveal",
+            label: '兜底路由',
+            style: {
+              stroke: '#ff9900'
+            }
           })
           _blueNode = _blueService + "_blue"
           _greenNode = _greenService + "_green"
@@ -204,7 +299,7 @@ const service = (props) => {
 
   return (
     <>
-      <div ref={ref}></div>
+      <div style={{ flex: 1 }} ref={ref}></div>
     </>
   )
 }

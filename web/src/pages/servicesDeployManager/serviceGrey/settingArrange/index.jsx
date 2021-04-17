@@ -1,21 +1,23 @@
 import { constant } from 'lodash';
 import { Select, Space, Row, Col, Button } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { RedoOutlined, EditOutlined } from '@ant-design/icons';
-import { useEffect } from 'react';
+import { RedoOutlined, EditOutlined } from '@ant-design/icons'
 
-import { instanceMap } from '@/services/console'
+import { instanceMap, instanceMapNotArea } from '@/services/console'
 
 const settingArrange = (props) => {
 
-  const gobal = props.gobal;
+  const gobal = props.gobal
+  const version = props.version
 
   const [instanceList, setInstanceList] = useState([])
   const [serviceList, setServiceList] = useState([])
   const [instance, setInstance] = useState()
   const [grayService, setGrayService] = useState()
   const [stableService, setStableService] = useState()
+  const [versionRegion, setVersionRegion] = useState()
+  const [arrangeMap, setArrangeMap] = useState({})
 
   const addInstance = () => {
     if (instance) {
@@ -58,25 +60,56 @@ const settingArrange = (props) => {
 
   useEffect(() => {
     if (gobal.subscribe) {
-      instanceMap([gobal.subscribe]).then(initInstanceList)
+      if (gobal.gatewayType == 1) {
+        instanceMap([gobal.subscribe]).then(initInstanceList)
+      } else {
+        instanceMapNotArea([gobal.subscribe]).then(initInstanceList)
+      }
+    }
+    if (gobal.policy == 1) {
+      setVersionRegion('version')
+    } else {
+      setVersionRegion('region')
     }
   }, [gobal])
 
   useEffect(() => {
+    if (gobal && gobal.arrange && gobal.arrange.length > 0) {
+      let _arrangeMap = {}
+      gobal.arrange.forEach(item => {
+        _arrangeMap[item.name] = item
+      })
+      setArrangeMap(_arrangeMap)
+    }
+  }, [version])
+
+  useEffect(() => {
     let _instance = instanceList.find(i => i.name == instance)
     if (_instance) {
-      if (!_instance.value.find(i => i.version == 'default')) {
+      if (!_instance.value.find(i => i[versionRegion] == 'default')) {
         _instance.value.push({
-          version: 'default'
+          version: 'default',
+          region: 'default'
         })
       }
       
       setServiceList(_instance.value)
       if (_instance.value.length > 0) {
-        setGrayService(_instance.value[0].version)
-        setStableService(_instance.value[0].version)
+        console.log(instance)
+        console.log(arrangeMap)
+        if (arrangeMap[instance]) {
+          // 保存的值
+          setGrayService(arrangeMap[instance].grayService)
+          setStableService(arrangeMap[instance].stableService)
+        } else {
+          // 默认值
+          setGrayService(_instance.value[0][versionRegion])
+          setStableService(_instance.value[0][versionRegion])
+        }
+        console.log(`gray:${grayService},stable:${stableService}`)
       }
     }
+
 
   }, [instance])
 
@@ -119,7 +152,7 @@ const settingArrange = (props) => {
                 {
                 serviceList.map((item, index) => {
                   return (
-                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
+                    <Select.Option key={index} value={item[versionRegion]}>{item[versionRegion]}</Select.Option>
                   )
                 })
               }
@@ -139,7 +172,7 @@ const settingArrange = (props) => {
                 {
                 serviceList.map((item, index) => {
                   return (
-                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
+                    <Select.Option key={index} value={item[versionRegion]}>{item[versionRegion]}</Select.Option>
                   )
                 })
               }

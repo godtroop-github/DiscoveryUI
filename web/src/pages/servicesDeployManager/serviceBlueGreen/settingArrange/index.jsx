@@ -2,13 +2,14 @@ import { constant } from 'lodash';
 import { Select, Space, Row, Col, Button, Input, Modal, Divider } from 'antd';
 import React, { useState, useEffect } from 'react';
 
-import { RedoOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
+import { RedoOutlined, EditOutlined } from '@ant-design/icons';
 
-import { instanceMap } from '@/services/console'
+import { instanceMap, instanceMapNotArea } from '@/services/console'
 
 const settingArrange = (props) => {
 
   const gobal = props.gobal
+  const version = props.version
 
   const [instanceList, setInstanceList] = useState([])
   const [serviceList, setServiceList] = useState([])
@@ -16,6 +17,8 @@ const settingArrange = (props) => {
   const [blueService, setBlueService] = useState()
   const [greenService, setGreenervice] = useState()
   const [revealService, setRevealService] = useState()
+  const [versionRegion, setVersionRegion] = useState()
+  const [arrangeMap, setArrangeMap] = useState({})
 
   const addInstance = () => {
     if (instance) {
@@ -60,27 +63,63 @@ const settingArrange = (props) => {
 
   useEffect(() => {
     if (gobal.subscribe) {
-      instanceMap([gobal.subscribe]).then(initInstanceList)
+      if (gobal.gatewayType == 1) {
+        instanceMap([gobal.subscribe]).then(initInstanceList)
+      } else {
+        instanceMapNotArea([gobal.subscribe]).then(initInstanceList)
+      }
+    }
+    if (gobal.policy == 1) {
+      setVersionRegion('version')
+    } else {
+      setVersionRegion('region')
     }
   }, [gobal])
 
   useEffect(() => {
+    if (gobal && gobal.arrange && gobal.arrange.length > 0) {
+      console.log(gobal.arrange)
+      let _arrangeMap = {}
+      gobal.arrange.forEach(item => {
+        _arrangeMap[item.name] = item
+      })
+      setArrangeMap(_arrangeMap)
+    }
+  }, [version])
+
+  const changeServiceValue = () => {
     let _instance = instanceList.find(i => i.name == instance)
     if (_instance) {
-      if (!_instance.value.find(i => i.version == 'default')) {
+      if (!_instance.value.find(i => i[versionRegion] == 'default')) {
         _instance.value.push({
-          version: 'default'
+          version: 'default',
+          region: 'default'
         })
       }
-      
+
       setServiceList(_instance.value)
       if (_instance.value.length > 0) {
-        setBlueService(_instance.value[0].version)
-        setGreenervice(_instance.value[0].version)
-        setRevealService(_instance.value[0].version)
+        console.log(instance)
+        console.log(arrangeMap)
+        if (arrangeMap[instance]) {
+          // 保存的值
+          setBlueService(arrangeMap[instance].blueService)
+          setGreenervice(arrangeMap[instance].greenService)
+          setRevealService(arrangeMap[instance].revealService)
+          console.log(arrangeMap[instance].blueService)
+        } else {
+          // 默认值
+          setBlueService(_instance.value[0][versionRegion])
+          setGreenervice(_instance.value[0][versionRegion])
+          setRevealService(_instance.value[0][versionRegion])
+        }
+        console.log(`blue:${blueService},green:${greenService},reveal:${revealService} `)
       }
     }
+  }
 
+  useEffect(() => {
+    changeServiceValue()
   }, [instance])
 
   return (
@@ -122,33 +161,38 @@ const settingArrange = (props) => {
               {
                 serviceList.map((item, index) => {
                   return (
-                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
+                    <Select.Option key={index} value={item[versionRegion]}>{item[versionRegion]}</Select.Option>
                   )
                 })
               }
             </Select>
           </Col>
         </Row>
-        <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
-          <Col flex="40px">绿</Col>
-          <Col flex="310px">
-            <Select
-              style={{ width: "100%" }}
-              value={greenService}
-              onChange={(value) => {
-                setGreenervice(value)
-              }}
-              showSearch>
-              {
-                serviceList.map((item, index) => {
-                  return (
-                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
-                  )
-                })
-              }
-            </Select>
-          </Col>
-        </Row>
+        {
+          gobal.routeType == 1 &&
+          (
+            <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
+              <Col flex="40px">绿</Col>
+              <Col flex="310px">
+                <Select
+                  style={{ width: "100%" }}
+                  value={greenService}
+                  onChange={(value) => {
+                    setGreenervice(value)
+                  }}
+                  showSearch>
+                  {
+                    serviceList.map((item, index) => {
+                      return (
+                        <Select.Option key={index} value={item[versionRegion]}>{item[versionRegion]}</Select.Option>
+                      )
+                    })
+                  }
+                </Select>
+              </Col>
+            </Row>
+          )
+        }
         <Row gutter={{ xs: 1, sm: 2, md: 3 }}>
           <Col flex="40px">兜底</Col>
           <Col flex="310px">
@@ -162,7 +206,7 @@ const settingArrange = (props) => {
               {
                 serviceList.map((item, index) => {
                   return (
-                    <Select.Option key={index} value={item.version}>{item.version}</Select.Option>
+                    <Select.Option key={index} value={item[versionRegion]}>{item[versionRegion]}</Select.Option>
                   )
                 })
               }

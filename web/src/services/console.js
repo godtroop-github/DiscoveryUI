@@ -6,6 +6,30 @@ export async function groups() {
     method: 'GET'
   });
 }
+
+// 获取非域网关服务(列表)
+export async function instanceMapNotArea(params) {
+  const services = await getServices()
+  const instanceMapRes = await instanceMap(params)
+  services.forEach(element => {
+    if (!instanceMapRes[element]) {
+      instanceMapRes[element] = []
+    }
+  })
+  return instanceMapRes
+}
+
+// 推送规则到配置中心
+export async function remoteConfigUpdate(params) {
+  let group = params.group
+  let serviceId = params.serviceId
+  let config = params.config
+  return request(`/console/remote-config/update/${group}/${serviceId}`, {
+    method: 'POST',
+    data: config
+  });
+}
+
 export async function instanceMap(params) {
   return request(`/console/instance-map`, {
     method: 'POST',
@@ -19,6 +43,7 @@ export async function getRealServices() {
   const realServices = services.filter(service => !gateways.some(gateway => gateway == service))
   return realServices
 }
+
 // 获取所有服务实例
 export async function getServices() {
   return request(`/console/services`, {
@@ -42,5 +67,13 @@ export async function validateExpression(params) {
   return request('/console/validate-expression', {
     method: 'GET',
     params: params,
+  });
+}
+// 获取远程配置中心配置规则
+export async function remoteConfig(params) {
+  let group = params.group
+  let serviceId = params.serviceId
+  return request(`/console/remote-config/view/${group}/${serviceId}`, {
+    method: 'GET'
   });
 }

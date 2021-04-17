@@ -5,11 +5,12 @@ import { CheckOutlined, DownOutlined } from '@ant-design/icons';
 import { constant } from 'lodash';
 const { Title, Text, Link } = Typography;
 
-const serviceBlueGreenSave = () => {
+const serviceBlueGreenSave = (props) => {
  const [visible, setVisible] = useState(false);
  // 新建 - 确定
  const save = () => {
-
+ 
+   const gobal = props.gobal
  }
 
  return (

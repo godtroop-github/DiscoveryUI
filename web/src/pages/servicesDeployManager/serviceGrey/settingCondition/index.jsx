@@ -1,10 +1,13 @@
 import { constant } from 'lodash';
 import { Select, Space, Row, Col, Button, InputNumber } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { RedoOutlined, EditOutlined, DownOutlined } from '@ant-design/icons';
 
-const serviceGraySettingCondition = () => {
+const serviceGraySettingCondition = (props) => {
+
+  let condition = props.condition
+  let version = props.version
 
  const [grayPer, setGrayPer] = useState(50)
 
@@ -15,6 +18,26 @@ const serviceGraySettingCondition = () => {
  const staticPerOnChange = (value) => {
   setGrayPer(100 - value)
  }
+
+ const editCondition = () => {
+  props.update({
+    type: 'gray',
+    value: grayPer
+  })
+ }
+
+ useEffect(() => {
+   if (condition && condition.gray) {
+    setGrayPer(condition.gray)
+   }
+ }, [version])
+
+ useEffect(() => {
+  props.update({
+    type: 'gray',
+    value: grayPer
+  })
+ }, [])
 
  return (
   <>
@@ -50,7 +73,7 @@ const serviceGraySettingCondition = () => {
     <Row>
      <Col>
       <Space>
-       <Button type="primary" shape="round" icon={<EditOutlined />} >
+       <Button type="primary" shape="round" icon={<EditOutlined />} onClick={editCondition}>
         修改
                   </Button>
       </Space>
