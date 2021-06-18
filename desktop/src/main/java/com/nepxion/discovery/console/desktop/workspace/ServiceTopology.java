@@ -46,6 +46,7 @@ import com.nepxion.cots.twaver.element.TGroupType;
 import com.nepxion.cots.twaver.element.TNode;
 import com.nepxion.cots.twaver.graph.TGraphBackground;
 import com.nepxion.cots.twaver.graph.TGraphManager;
+import com.nepxion.discovery.common.entity.FormatType;
 import com.nepxion.discovery.common.entity.InstanceEntityWrapper;
 import com.nepxion.discovery.common.entity.ResultEntity;
 import com.nepxion.discovery.common.entity.ServiceType;
@@ -888,7 +889,7 @@ public class ServiceTopology extends BasicTopology {
 
                     String result = null;
                     try {
-                        result = ConsoleController.remoteConfigUpdate(filter, filter, rule);
+                        result = ConsoleController.remoteConfigUpdate(filter, filter, rule, FormatType.XML_FORMAT);
                     } catch (Exception ex) {
                         JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
@@ -1269,7 +1270,7 @@ public class ServiceTopology extends BasicTopology {
                             String filter = getFilter(group);
                             String result = null;
                             try {
-                                result = ConsoleController.remoteConfigUpdate(filter, serviceId, dynamicRule);
+                                result = ConsoleController.remoteConfigUpdate(filter, serviceId, dynamicRule, FormatType.XML_FORMAT);
                             } catch (Exception ex) {
                                 JExceptionDialog.traceException(HandleManager.getFrame(ServiceTopology.this), ConsoleLocaleFactory.getString("query_data_failure"), ex);
 
