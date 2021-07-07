@@ -9,6 +9,10 @@ package com.nepxion.discovery.console.desktop;
  * @version 1.0
  */
 
+/**
+ * test comment
+ */
+
 import com.nepxion.discovery.console.desktop.common.component.AbstractConsoleLogin;
 
 public class ConsoleLogin extends AbstractConsoleLogin {
